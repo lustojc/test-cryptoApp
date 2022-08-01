@@ -1,0 +1,17 @@
+@import '../variables';
+
+.crypto-block {
+  display: flex;
+  padding: 30px;
+  border: 1px solid grey;
+  margin-top: 20px;
+  border-radius: 30px;
+
+  &-wrapper {
+    margin: auto 50px;
+  }
+
+  &__rank {
+    margin-right: 20px;
+  }
+}
