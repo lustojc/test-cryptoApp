@@ -1,17 +1,48 @@
 @import '../variables';
 
 .crypto-block {
-  display: flex;
-  padding: 30px;
-  border: 1px solid grey;
-  margin-top: 20px;
-  border-radius: 30px;
+  width: 1300px;
+  border-collapse: collapse;
+
+  &__title {
+    width: 400px;
+  }
+
+  td {
+    padding: 20px 20px 20px 0;
+    text-align: left;
+    &:first-child {
+      text-align: center;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  thead tr th {
+    text-align: left;
+    &:first-child {
+      text-align: center;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
 
   &-wrapper {
     margin: auto 50px;
+    width: 1400px;
+    tbody {
+      &:hover {
+        background-color: lightgray;
+        cursor: pointer;
+        transition: all linear 1.5s;
+      }
+    }
   }
 
   &__rank {
-    margin-right: 20px;
+    text-align: center;
+    width: 90px;
   }
 }
