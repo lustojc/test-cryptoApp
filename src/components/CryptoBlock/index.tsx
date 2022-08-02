@@ -34,7 +34,7 @@ export default function CryptoBlock({ currentCoins }: props) {
 
         {currentCoins.map((coin) => (
           <tbody key={uuidv4()}>
-            <tr>
+            <tr className="test" onClick={() => console.log('Клик по ховеру')}>
               <td className="crypto-block__rank">{coin.rank}</td>
               <td className="crypto-block__title">{coin.name}</td>
               <td className="crypto-block__price">${parseFloat(coin.priceUsd).toFixed(2)}</td>
@@ -56,6 +56,11 @@ export default function CryptoBlock({ currentCoins }: props) {
                 {parseFloat(coin.changePercent24Hr).toFixed(2)}%
               </td>
             </tr>
+            <div>
+              <button onClick={() => console.log('Click')} className="crypto-block__btn">
+                +
+              </button>
+            </div>
           </tbody>
         ))}
       </table>

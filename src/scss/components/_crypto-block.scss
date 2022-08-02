@@ -29,20 +29,35 @@
     }
   }
 
+  tbody tr{
+    &:hover {
+      background-color: lightgray;
+      cursor: pointer;
+      transition: all linear 1.5s;
+    }
+  }
+
+  tbody div {
+    align-items: flex-end;
+  }
+
   &-wrapper {
     margin: auto 50px;
     width: 1400px;
-    tbody {
-      &:hover {
-        background-color: lightgray;
-        cursor: pointer;
-        transition: all linear 1.5s;
-      }
-    }
   }
 
   &__rank {
     text-align: center;
     width: 90px;
+  }
+
+  &__btn {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(74, 147, 53);
+    color: aliceblue;
+    cursor: pointer;
+    border: 0px;
+    margin-left: 20px;
   }
 }
