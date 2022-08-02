@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 
+import { useAppDispatch } from '../../hooks/hooks';
+
+import { addItems } from '../../redux/slices/portfolioSlice';
+
 interface props {
   currentCoins: Array<Crypto>;
 }
@@ -16,6 +20,18 @@ interface Crypto {
 }
 
 export default function CryptoBlock({ currentCoins }: props) {
+  const dispatch = useAppDispatch();
+
+  const onClickAdd = (id: number, title: string, price: number) => {
+    const item = {
+      id,
+      title,
+      price,
+    };
+
+    dispatch(addItems(item));
+  };
+
   return (
     <div className="crypto-block-wrapper">
       <table className="crypto-block">
@@ -57,7 +73,9 @@ export default function CryptoBlock({ currentCoins }: props) {
               </td>
             </tr>
             <div>
-              <button onClick={() => console.log('Click')} className="crypto-block__btn">
+              <button
+                onClick={() => onClickAdd(+coin.rank, coin.name, +coin.priceUsd)}
+                className="crypto-block__btn">
                 +
               </button>
             </div>

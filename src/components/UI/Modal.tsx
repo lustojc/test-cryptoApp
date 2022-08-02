@@ -1,3 +1,5 @@
+import PortfolioItem from '../PortfolioItem/PortfolioItem';
+
 import styles from './modal.module.scss';
 
 interface props {
@@ -5,6 +7,8 @@ interface props {
 }
 
 export const Modal = ({ setModalActive }: props) => {
+
+
   return (
     <>
       <div className={styles.centered}>
@@ -15,7 +19,9 @@ export const Modal = ({ setModalActive }: props) => {
           <button className={styles.closeBtn} onClick={() => setModalActive(false)}>
             X
           </button>
-          <div className={styles.modalContent}></div>
+          <div className={styles.modalContent}>
+            <PortfolioItem />
+          </div>
         </div>
       </div>
     </>

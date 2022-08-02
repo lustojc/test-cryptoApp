@@ -1,8 +1,13 @@
 import { useState } from 'react';
+
+import { useAppSelector } from '../hooks/hooks';
+
 import { Modal } from './UI/Modal';
 
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
+
+  const price = useAppSelector((state) => state.portfolioSlice.totalPrice.toFixed(2));
 
   return (
     <div className="header">
@@ -14,7 +19,7 @@ export default function Header() {
         </div>
         <div className="header__portfolio" onClick={() => setModalActive(true)}>
           <div>My Portfolio</div>
-          <div>134,32 USD +2,38 (1,80 %).</div>
+          <div>{price} USD +2,38 (1,80 %).</div>
         </div>
         {modalActive && <Modal setModalActive={setModalActive} />}
       </div>
