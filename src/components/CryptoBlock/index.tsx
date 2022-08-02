@@ -23,12 +23,14 @@ export default function CryptoBlock({ currentCoins }: props) {
   const dispatch = useAppDispatch();
 
   const onClickAdd = (id: number, title: string, price: number) => {
+    const amount = prompt('How many coins do you want to add to your portfolio?');
     const item = {
       id,
       title,
       price,
+      amount,
     };
-
+    localStorage.setItem('coins', JSON.stringify(item));
     dispatch(addItems(item));
   };
 

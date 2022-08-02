@@ -7,8 +7,6 @@ interface props {
 }
 
 export const Modal = ({ setModalActive }: props) => {
-
-
   return (
     <>
       <div className={styles.centered}>

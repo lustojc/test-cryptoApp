@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { useAppSelector } from '../hooks/hooks';
 
@@ -8,6 +8,17 @@ export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   const price = useAppSelector((state) => state.portfolioSlice.totalPrice.toFixed(2));
+  const items = useAppSelector((state) => state.portfolioSlice.items);
+
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('portfolio', json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="header">

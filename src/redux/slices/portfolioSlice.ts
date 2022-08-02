@@ -1,20 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { calcTotalPrice } from '../../utils/calcTotalPrice';
+import { getPortfolioFromLS } from '../../utils/getPortfolioFromLS';
 
-interface items {
+export interface items {
   items: any[];
   totalPrice: number;
 }
 
-interface coinObj {
-  count: number;
-  price: number;
-  tittle: string;
-  id: number;
-}
+const { items, totalPrice } = getPortfolioFromLS();
 
 const initialState: items = {
-  items: [],
-  totalPrice: 0,
+  items,
+  totalPrice,
 };
 
 export const portfolioSlice = createSlice({
@@ -22,23 +19,22 @@ export const portfolioSlice = createSlice({
   initialState,
   reducers: {
     addItems(state: items, action) {
-      const findItem = state.items.find((obj) => obj.id == action.payload.id);
+      const findItem = state.items.find((obj: { id: number }) => obj.id === action.payload.id);
 
       if (findItem) {
-        findItem.count++;
+        findItem.count += +action.payload.amount;
       } else {
         state.items.push({
           ...action.payload,
-          count: 1,
+          count: +action.payload.amount,
         });
       }
-      state.totalPrice = state.items.reduce((sum: any, obj: coinObj) => {
-        return obj.price * obj.count + sum;
-      }, 0);
+
+      state.totalPrice = calcTotalPrice(state.items);
     },
 
     removeItem(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload.id);
+      state.items = state.items.filter((obj: { id: number }) => obj.id !== action.payload.id);
       if (state.totalPrice >= 0) {
         state.totalPrice = state.totalPrice - action.payload.currentTotalPrice;
       } else {
