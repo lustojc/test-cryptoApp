@@ -4,26 +4,27 @@ import Header from './components/Header';
 import CryptoBlock from './components/CryptoBlock';
 import Pagination from './components/Pagination';
 
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
+
+import { fetchCoins } from './redux/slices/coinSlice';
+
 import './scss/app.scss';
 
 function App() {
-  const [coinsData, setCoinsData] = useState<[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinsPerPage] = useState<number>(10);
 
-  const fetchCoins = async () => {
-    const res = await fetch(`https://api.coincap.io/v2/assets`);
-    const data = await res.json();
-    setCoinsData(data.data);
-  };
+  const allCoins = useAppSelector((state) => state.coinSlice.coins);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchCoins();
+    dispatch(fetchCoins());
   }, []);
 
   const lastCoinIndex = currentPage * coinsPerPage;
   const firstCoinIndex = lastCoinIndex - coinsPerPage;
-  const currentCoins = coinsData.slice(firstCoinIndex, lastCoinIndex);
+  const currentCoins = allCoins.slice(firstCoinIndex, lastCoinIndex);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -34,7 +35,7 @@ function App() {
       <div className="wrapper">
         <Header />
         <CryptoBlock currentCoins={currentCoins} />
-        <Pagination coinsPerPage={coinsPerPage} totalCoins={coinsData.length} paginate={paginate} />
+        <Pagination coinsPerPage={coinsPerPage} totalCoins={allCoins.length} paginate={paginate} />
       </div>
     </div>
   );

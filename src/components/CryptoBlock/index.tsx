@@ -33,7 +33,7 @@ export default function CryptoBlock({ currentCoins }: props) {
         </thead>
 
         {currentCoins.map((coin) => (
-          <tbody>
+          <tbody key={uuidv4()}>
             <tr>
               <td className="crypto-block__rank">{coin.rank}</td>
               <td className="crypto-block__title">{coin.name}</td>
