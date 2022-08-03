@@ -37,20 +37,17 @@ export default function Header() {
             <h1>Cryptocurrency App</h1>
           </div>
         </div>
-        <div className="header__portfolio" onClick={() => setModalActive(true)}>
+        <div className="header-portfolio" onClick={() => setModalActive(true)}>
           <div>My Portfolio</div>
-          <div style={{ display: 'flex' }}>
-            <div style={{ marginRight: '10px' }}>{price} USD </div>
+          <div className="header-portfolio__info">
+            <div className="header-portfolio__price">{price} USD </div>
             <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
               {priceDiff > 0 ? '+' : ''}
               {priceDiff} $
             </div>
             <div
-              style={
-                +percentDiff > 0
-                  ? { color: 'green', marginLeft: '10px' }
-                  : { color: 'red', marginLeft: '10px' }
-              }>
+              className="header-portfolio__diffPercents"
+              style={+percentDiff > 0 ? { color: 'green' } : { color: 'red' }}>
               ({percentDiff})%
             </div>
           </div>

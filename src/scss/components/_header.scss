@@ -5,8 +5,20 @@
   padding: 40px 0;
   margin: 0 40px 40px 40px;
 
-  &__portfolio {
+  &-portfolio {
     cursor: pointer;
+
+    &__info {
+      display: flex;
+    }
+
+    &__price {
+      margin-right: 10px;
+    }
+    &__diffPercents {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
   }
 
   .container {
