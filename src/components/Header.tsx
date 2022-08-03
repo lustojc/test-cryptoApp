@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useAppSelector } from '../hooks/hooks';
 
 import { Modal } from './UI/Modal';
@@ -34,7 +36,9 @@ export default function Header() {
       <div className="container">
         <div className="header__info">
           <div>
-            <h1>Cryptocurrency App</h1>
+            <Link to="/">
+              <h1>Cryptocurrency App</h1>
+            </Link>
           </div>
         </div>
         <div className="header-portfolio" onClick={() => setModalActive(true)}>

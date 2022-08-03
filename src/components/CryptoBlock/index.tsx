@@ -1,27 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
+import { Route, Routes, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { addItems, getCurrentPrice } from '../../redux/slices/portfolioSlice';
+import Pagination from '../Pagination';
 
-interface props {
-  currentCoins: Array<Crypto>;
-}
+export default function CryptoBlock() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [coinsPerPage] = useState<number>(10);
 
-interface Crypto {
-  name: string;
-  rank: string;
-  priceUsd: string;
-  marketCapUsd: string;
-  vwap24Hr: string;
-  supply: string;
-  volumeUsd24Hr: string;
-  changePercent24Hr: string;
-}
-
-export default function CryptoBlock({ currentCoins }: props) {
   const dispatch = useAppDispatch();
 
   const allCoins = useAppSelector((state) => state.coinSlice.coins);
@@ -65,56 +55,72 @@ export default function CryptoBlock({ currentCoins }: props) {
     dispatch(getCurrentPrice(totalPorfolioPrice(allCoins, items)));
   }, [allCoins, items]);
 
-  return (
-    <div className="crypto-block-wrapper">
-      <table className="crypto-block">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Market Cap</th>
-            <th>VWAP</th>
-            <th>Supply</th>
-            <th>Volume(24Hr)</th>
-            <th>Change(24Hr)</th>
-          </tr>
-        </thead>
+  const lastCoinIndex = currentPage * coinsPerPage;
+  const firstCoinIndex = lastCoinIndex - coinsPerPage;
+  const currentCoins = allCoins.slice(firstCoinIndex, lastCoinIndex);
 
-        {currentCoins.map((coin) => (
-          <tbody key={uuidv4()}>
-            <tr className="test" onClick={() => console.log('Клик по ховеру')}>
-              <td className="crypto-block__rank">{coin.rank}</td>
-              <td className="crypto-block__title">{coin.name}</td>
-              <td className="crypto-block__price">${parseFloat(coin.priceUsd).toFixed(2)}</td>
-              <td className="crypto-block__marketCap">
-                ${(parseFloat(coin.marketCapUsd) / 1000000000).toFixed(2)}b
-              </td>
-              <td className="crypto-block__vwap">${parseFloat(coin.vwap24Hr).toFixed(2)}</td>
-              <td className="crypto-block__supply">
-                ${(parseFloat(coin.supply) / 1000000).toFixed(2)}m
-              </td>
-              <td className="crypto-block__volume">
-                ${(parseFloat(coin.volumeUsd24Hr) / 1000000000).toFixed(2)}b
-              </td>
-              <td
-                className="crypto-block__volume"
-                style={
-                  coin.changePercent24Hr.startsWith('-') ? { color: 'red' } : { color: 'green' }
-                }>
-                {parseFloat(coin.changePercent24Hr).toFixed(2)}%
-              </td>
-            </tr>
-            <div>
-              <button
-                onClick={() => onClickAdd(+coin.rank, coin.name, +coin.priceUsd)}
-                className="crypto-block__btn">
-                +
-              </button>
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  return (
+    <>
+      <div className="crypto-block-wrapper">
+        <div>
+          <ul className="crypto-block__descriptions">
+            <li>Rank</li>
+            <li>Name</li>
+            <li>Price</li>
+            <li>Market Cap</li>
+            <li>VWAP</li>
+            <li>Supply</li>
+            <li>Volume(24Hr)</li>
+            <li>Change(24Hr)</li>
+          </ul>
+        </div>
+        <div>
+          {currentCoins.map((coin: any) => (
+            <div className="crypto-block">
+              <div>
+                <Link to={'/coin/' + coin.rank}>
+                  <ul className="crypto-block__info" key={uuidv4()}>
+                    <li className="crypto-block__rank">{coin.rank}</li>
+                    <li className="crypto-block__title">{coin.name}</li>
+                    <li className="crypto-block__price">${parseFloat(coin.priceUsd).toFixed(2)}</li>
+                    <li className="crypto-block__marketCap">
+                      ${(parseFloat(coin.marketCapUsd) / 1000000000).toFixed(2)}b
+                    </li>
+                    <li className="crypto-block__vwap">${parseFloat(coin.vwap24Hr).toFixed(2)}</li>
+                    <li className="crypto-block__supply">
+                      ${(parseFloat(coin.supply) / 1000000).toFixed(2)}m
+                    </li>
+                    <li className="crypto-block__volume">
+                      ${(parseFloat(coin.volumeUsd24Hr) / 1000000000).toFixed(2)}b
+                    </li>
+                    <li
+                      className="crypto-block__volume"
+                      style={
+                        coin.changePercent24Hr.startsWith('-')
+                          ? { color: 'red' }
+                          : { color: 'green' }
+                      }>
+                      {parseFloat(coin.changePercent24Hr).toFixed(2)}%
+                    </li>
+                  </ul>
+                </Link>
+              </div>
+              <div>
+                <button
+                  onClick={() => onClickAdd(+coin.rank, coin.name, +coin.priceUsd)}
+                  className="crypto-block__btn">
+                  +
+                </button>
+              </div>
             </div>
-          </tbody>
-        ))}
-      </table>
-    </div>
+          ))}
+        </div>
+      </div>
+      <Pagination coinsPerPage={coinsPerPage} totalCoins={allCoins.length} paginate={paginate} />
+    </>
   );
 }
