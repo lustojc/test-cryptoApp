@@ -18,13 +18,13 @@ function App() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchCoins());
-  }, []);
-
   const lastCoinIndex = currentPage * coinsPerPage;
   const firstCoinIndex = lastCoinIndex - coinsPerPage;
   const currentCoins = allCoins.slice(firstCoinIndex, lastCoinIndex);
+
+  useEffect(() => {
+    dispatch(fetchCoins());
+  }, []);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);

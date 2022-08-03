@@ -1,4 +1,4 @@
-interface coinObj {
+export interface coinObj {
   count: number;
   price: number;
   tittle: string;

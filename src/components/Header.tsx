@@ -8,7 +8,16 @@ export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
   const price = useAppSelector((state) => state.portfolioSlice.totalPrice.toFixed(2));
+
+  const currentPrice = useAppSelector((state) =>
+    state.portfolioSlice.currentPortfolioPrice.toFixed(2),
+  );
+
   const items = useAppSelector((state) => state.portfolioSlice.items);
+
+  const priceDiff = parseFloat((+price - +currentPrice).toFixed(2));
+
+  const percentDiff = +(100 - (+currentPrice * 100) / +price).toFixed(3) || 0;
 
   const isMounted = useRef(false);
 
@@ -30,7 +39,21 @@ export default function Header() {
         </div>
         <div className="header__portfolio" onClick={() => setModalActive(true)}>
           <div>My Portfolio</div>
-          <div>{price} USD +2,38 (1,80 %).</div>
+          <div style={{ display: 'flex' }}>
+            <div style={{ marginRight: '10px' }}>{price} USD </div>
+            <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
+              {priceDiff > 0 ? '+' : ''}
+              {priceDiff} $
+            </div>
+            <div
+              style={
+                +percentDiff > 0
+                  ? { color: 'green', marginLeft: '10px' }
+                  : { color: 'red', marginLeft: '10px' }
+              }>
+              ({percentDiff})%
+            </div>
+          </div>
         </div>
         {modalActive && <Modal setModalActive={setModalActive} />}
       </div>
