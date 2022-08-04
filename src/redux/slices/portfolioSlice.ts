@@ -1,7 +1,7 @@
-import { getPortfolioFromLS } from './../../utils/getPortfolioFromLS';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
+import { getPortfolioFromLS } from '../../utils/getPortfolioFromLS';
 
 export interface items {
   items: any[];

@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/hooks';
-import Ticker from 'react-ticker';
 
 import { Modal } from '../Modal/Modal';
 

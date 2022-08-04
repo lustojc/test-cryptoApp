@@ -17,7 +17,6 @@ export default function CoinInfo() {
   const { coinId }: any = location.state;
 
   const dispatch = useAppDispatch();
-  const isMounted = useRef(false);
 
   const { coinInfo, coinPriceInterval } = useAppSelector((state) => state.choosenCoinSlice);
 
