@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 
-import { Modal } from './UI/Modal';
+import { Modal } from '../UI/Modal';
 
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -51,7 +51,7 @@ export default function Header() {
             </div>
             <div
               className="header-portfolio__diffPercents"
-              style={+percentDiff > 0 ? { color: 'green' } : { color: 'red' }}>
+              style={+percentDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
               ({percentDiff})%
             </div>
           </div>

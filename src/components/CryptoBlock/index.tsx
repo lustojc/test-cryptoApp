@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { addItems, getCurrentPrice } from '../../redux/slices/portfolioSlice';
+import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
+
 import Pagination from '../Pagination';
+import AddButton from '../AddButton';
 
 export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -26,29 +29,6 @@ export default function CryptoBlock() {
       amount,
     };
     dispatch(addItems(item));
-  };
-
-  const totalPorfolioPrice = (allCoins: any, items: any) => {
-    const itemIds = items.map((el: any) => el.id);
-
-    let coinsArr = [];
-    for (let i = 0; i < itemIds.length; i++) {
-      const a = allCoins.find((obj: { rank: any }) => +obj.rank === itemIds[i]);
-      let item = {};
-      let count = [];
-      for (let j = 0; j < items.length; j++) {
-        const element = items[j];
-        count.push(element.count);
-      }
-      item = {
-        id: +a?.rank,
-        title: a?.name,
-        count: +count[i],
-        price: +a?.priceUsd,
-      };
-      coinsArr.push(item);
-    }
-    return coinsArr;
   };
 
   useEffect(() => {
@@ -82,7 +62,7 @@ export default function CryptoBlock() {
           {currentCoins.map((coin: any) => (
             <div className="crypto-block">
               <div>
-                <Link to={'/coin/' + coin.rank}>
+                <Link to={'/coin/' + coin.id} state={{ coinId: coin.id }}>
                   <ul className="crypto-block__info" key={uuidv4()}>
                     <li className="crypto-block__rank">{coin.rank}</li>
                     <li className="crypto-block__title">{coin.name}</li>
@@ -110,11 +90,13 @@ export default function CryptoBlock() {
                 </Link>
               </div>
               <div>
-                <button
-                  onClick={() => onClickAdd(+coin.rank, coin.name, +coin.priceUsd)}
-                  className="crypto-block__btn">
-                  +
-                </button>
+                <AddButton
+                  onClickAdd={onClickAdd}
+                  rank={+coin.rank}
+                  name={coin.name}
+                  price={+coin.priceUsd}
+                  text={'+'}
+                />
               </div>
             </div>
           ))}

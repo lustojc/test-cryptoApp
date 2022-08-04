@@ -1,0 +1,16 @@
+.info-block {
+  &-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  margin-left: 30px;
+  &__name {
+    color: black;
+    font-size: 30px;
+  }
+
+  &__price {
+    font-size: 20px;
+  }
+}
