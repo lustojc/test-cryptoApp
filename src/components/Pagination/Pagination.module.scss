@@ -17,10 +17,25 @@
       cursor: pointer;
       color: #fe5f1e;
 
+      @media (max-width: 755px) {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+      @media (max-width: 445px) {
+        width: 18px;
+        height: 18px;
+        font-size: 7px;
+      }
+
       &:hover {
         background-color: #fe5f1e;
         color: #fff;
       }
     }
+  }
+
+  @media (max-width: 445px) {
+    margin: 20px 25px;
   }
 }

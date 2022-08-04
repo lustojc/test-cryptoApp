@@ -34,15 +34,24 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 645px) {
+    @media (max-width: 820px) {
       flex-direction: column;
 
-      .header__portfolio {
+      .header-portfolio {
         margin-top: 20px;
+        &__title {
+          margin: 6px 90px;
+        }
       }
     }
   }
 
-  &__info {
+  &__title {
+    @media (max-width: 560px) {
+      display: flex;
+      font-size: 24px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
   }
 }

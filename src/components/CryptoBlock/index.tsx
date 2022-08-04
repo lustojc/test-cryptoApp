@@ -9,7 +9,7 @@ import { addItems, getCurrentPrice } from '../../redux/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
 
 import Pagination from '../Pagination';
-import AddButton from '../AddButton';
+import AddButton from '../Button/AddButton';
 
 export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);

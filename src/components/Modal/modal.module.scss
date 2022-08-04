@@ -13,6 +13,32 @@
   z-index: 10;
   border-radius: 16px;
   border: 2px solid grey;
+  overflow-y: scroll;
+
+  @media (max-width: 1300px) {
+    width: 900px;
+    height: 60vh;
+  }
+
+  @media (max-width: 995px) {
+    width: 700px;
+    height: 40vh;
+  }
+
+  @media (max-width: 735px) {
+    width: 600px;
+    height: 40vh;
+  }
+
+  @media (max-width: 620px) {
+    width: 450px;
+    height: 40vh;
+  }
+
+  @media (max-width: 480px) {
+    width: 320px;
+    height: 40vh;
+  }
 }
 
 .modalHeader {

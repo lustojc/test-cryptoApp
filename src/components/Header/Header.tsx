@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hooks';
 import Ticker from 'react-ticker';
 
-import { Modal } from '../UI/Modal';
+import { Modal } from '../Modal/Modal';
 
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export default function Header() {
         <div className="header__info">
           <div>
             <Link to="/">
-              <h1>Cryptocurrency App</h1>
+              <h1 className="header__title">Cryptocurrency App</h1>
             </Link>
             <div className="header-popular">
               {allCoins.slice(0, 3).map((el: any) => (
@@ -45,7 +45,7 @@ export default function Header() {
           </div>
         </div>
         <div className="header-portfolio" onClick={() => setModalActive(true)}>
-          <div>My Portfolio</div>
+          <div className="header-portfolio__title">My Portfolio</div>
           <div className="header-portfolio__info">
             <div className="header-portfolio__price">{price} USD </div>
             <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>

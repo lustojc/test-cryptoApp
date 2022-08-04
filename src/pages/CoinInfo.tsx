@@ -8,7 +8,7 @@ import { fetchCurrentCoinInfo, fetchPriceInterval } from '../redux/slices/chosen
 import { addItems, getCurrentPrice } from '../redux/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../utils/calcCurrentPrice';
 
-import AddButton from '../components/AddButton';
+import AddButton from '../components/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
 
 export default function CoinInfo() {
