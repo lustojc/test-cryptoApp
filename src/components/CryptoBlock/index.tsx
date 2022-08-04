@@ -60,7 +60,7 @@ export default function CryptoBlock() {
         </div>
         <div>
           {currentCoins.map((coin: any) => (
-            <div className="crypto-block">
+            <div key={coin.rank} className="crypto-block">
               <div>
                 <Link to={'/coin/' + coin.id} state={{ coinId: coin.id }}>
                   <ul className="crypto-block__info" key={uuidv4()}>

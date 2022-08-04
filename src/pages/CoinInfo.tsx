@@ -40,11 +40,8 @@ export default function CoinInfo() {
   }, [allCoins, items]);
 
   useEffect(() => {
-    if (isMounted.current) {
-      dispatch(fetchCurrentCoinInfo(coinId));
-      dispatch(fetchPriceInterval(coinId));
-    }
-    isMounted.current = true;
+    dispatch(fetchCurrentCoinInfo(coinId));
+    dispatch(fetchPriceInterval(coinId));
   }, []);
 
   return (
