@@ -17,9 +17,9 @@ export default function Header() {
 
   const allCoins = useAppSelector((state) => state.coinSlice.coins);
 
-  const priceDiff = parseFloat((+price - +currentPrice).toFixed(2));
+  const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 
-  const percentDiff = +(100 - (+currentPrice * 100) / +price).toFixed(3) || 0;
+  const percentDiff = +(100 - (+price * 100) / +currentPrice).toFixed(3) || 0;
 
   useEffect(() => {
     const json = JSON.stringify(items);
@@ -46,7 +46,7 @@ export default function Header() {
         <div className="header-portfolio" onClick={() => setModalActive(true)}>
           <div className="header-portfolio__title">My Portfolio</div>
           <div className="header-portfolio__info">
-            <div className="header-portfolio__price">{price} USD </div>
+            <div className="header-portfolio__price">{currentPrice} USD </div>
             <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
               {priceDiff > 0 ? '+' : ''}
               {priceDiff} $
