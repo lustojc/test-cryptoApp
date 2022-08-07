@@ -5,6 +5,15 @@
   transform: translate(-50%, -50%);
 }
 
+.modalBackup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #252424cc;
+  height: 100%;
+  width: 100vw;
+}
+
 .modal {
   width: 1200px;
   height: 70vh;

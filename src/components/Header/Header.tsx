@@ -33,6 +33,15 @@ export default function Header() {
   }, [items]);
 
   useEffect(() => {
+    if (modalActive) {
+      document.body.style.overflowY = 'hidden';
+    }
+    return () => {
+      document.body.style.overflowY = 'auto';
+    };
+  }, [modalActive]);
+
+  useEffect(() => {
     const closeModal = (e: { keyCode: number }) => {
       if (e.keyCode === 27) {
         setModalActive(false);
