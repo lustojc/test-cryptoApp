@@ -32,6 +32,16 @@ export default function Header() {
     localStorage.setItem('portfolio', json);
   }, [items]);
 
+  useEffect(() => {
+    const closeModal = (e: { keyCode: number }) => {
+      if (e.keyCode === 27) {
+        setModalActive(false);
+      }
+    };
+    window.addEventListener('keydown', closeModal);
+    return () => window.removeEventListener('keydown', closeModal);
+  }, []);
+
   return (
     <div className="header">
       <div className="container">
