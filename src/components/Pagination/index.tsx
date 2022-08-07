@@ -3,7 +3,7 @@ import styles from '../Pagination/Pagination.module.scss';
 interface props {
   coinsPerPage: number;
   totalCoins: number;
-  paginate: any;
+  paginate: (el: number) => void;
 }
 
 export default function Pagination({ coinsPerPage, totalCoins, paginate }: props) {

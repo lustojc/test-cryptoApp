@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-import { removeItem } from '../../redux/slices/portfolioSlice';
+import { item, removeItem } from '../../redux/slices/portfolioSlice';
 
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const PortfolioItem = () => {
         <div>Total $</div>
         <div>Amount</div>
       </div>
-      {userCoins.map((coin: any) => (
+      {userCoins.map((coin: item) => (
         <div key={coin.id} className="portfolio-block">
           <div className="portfolio-block__rank">{coin.id}.</div>
           <div className="portfolio-block__title">{coin.title}</div>

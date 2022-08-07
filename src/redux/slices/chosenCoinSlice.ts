@@ -2,14 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import axios from 'axios';
 
-export const fetchCurrentCoinInfo: any = createAsyncThunk('currentCoin/fetchCoin', async (coin) => {
-  const { data } = await axios.get(`https://api.coincap.io/v2/assets/${coin}`);
-  return data;
-});
+export const fetchCurrentCoinInfo = createAsyncThunk(
+  'currentCoin/fetchCoin',
+  async (coin: string) => {
+    const { data } = await axios.get(`https://api.coincap.io/v2/assets/${coin}`);
+    return data;
+  },
+);
 
-export const fetchPriceInterval: any = createAsyncThunk(
+export const fetchPriceInterval = createAsyncThunk(
   'currentCoin/fetchPriceInterval',
-  async (coin) => {
+  async (coin: string) => {
     const { data } = await axios.get(
       `https://api.coincap.io/v2/assets/${coin}/history?interval=m30`,
     );
@@ -17,10 +20,28 @@ export const fetchPriceInterval: any = createAsyncThunk(
   },
 );
 
+type coinInfo = {
+  rank: string;
+  name: string;
+  priceUsd: number;
+};
+
 interface currentCoin {
-  coinInfo: any[];
-  coinPriceInterval: any[];
+  coinInfo: coinInfo[];
+  coinPriceInterval: [];
   status: 'loading' | 'success' | 'error';
+}
+
+interface actionCoinTypes {
+  payload: {
+    data: coinInfo;
+  };
+}
+
+interface actionIntervalTypes {
+  payload: {
+    data: [];
+  };
 }
 
 const initialState: currentCoin = {
@@ -33,34 +54,40 @@ export const choosenCoinSlice = createSlice({
   name: 'currentCoin',
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchCurrentCoinInfo.pending]: (state: currentCoin) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchCurrentCoinInfo.pending, (state: currentCoin, action) => {
       state.status = 'loading';
       state.coinInfo = [];
-    },
-    [fetchCurrentCoinInfo.fulfilled]: (state: currentCoin, action: any) => {
-      const data = action.payload.data;
-      state.coinInfo.push(data);
-      state.status = 'success';
-    },
-    [fetchCurrentCoinInfo.refected]: (state: currentCoin) => {
+    });
+    builder.addCase(
+      fetchCurrentCoinInfo.fulfilled,
+      (state: currentCoin, action: actionCoinTypes) => {
+        state.coinInfo.push(action.payload.data);
+        state.status = 'success';
+      },
+    );
+    builder.addCase(fetchCurrentCoinInfo.rejected, (state: currentCoin) => {
       state.status = 'error';
       state.coinInfo = [];
-    },
+    });
 
-    [fetchPriceInterval.pending]: (state: currentCoin) => {
+    builder.addCase(fetchPriceInterval.pending, (state: currentCoin) => {
       state.status = 'loading';
-      state.coinInfo = [];
-    },
-    [fetchPriceInterval.fulfilled]: (state: currentCoin, action: any) => {
-      const data = action.payload.data;
-      state.coinPriceInterval = data;
-      state.status = 'success';
-    },
-    [fetchPriceInterval.refected]: (state: currentCoin) => {
+      state.coinPriceInterval = [];
+    });
+
+    builder.addCase(
+      fetchPriceInterval.fulfilled,
+      (state: currentCoin, action: actionIntervalTypes) => {
+        state.coinPriceInterval = action.payload.data;
+        state.status = 'success';
+      },
+    );
+
+    builder.addCase(fetchPriceInterval.rejected, (state: currentCoin) => {
       state.status = 'error';
-      state.coinInfo = [];
-    },
+      state.coinPriceInterval = [];
+    });
   },
 });
 

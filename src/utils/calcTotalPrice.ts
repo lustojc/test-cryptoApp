@@ -1,12 +1,10 @@
-export interface coinObj {
-  count: number;
+interface itemCount {
   price: number;
-  tittle: string;
-  id: number;
+  count: number;
 }
 
-export const calcTotalPrice = (items: any) => {
-  return items.reduce((sum: number, obj: coinObj) => {
+export const calcTotalPrice = (items: itemCount[]) => {
+  return items.reduce((sum: number, obj) => {
     return obj.price * obj.count + sum;
   }, 0);
 };

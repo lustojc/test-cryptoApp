@@ -3,8 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
 import { getPortfolioFromLS } from '../../utils/getPortfolioFromLS';
 
+export type item = {
+  id: number;
+  title: string;
+  price: number;
+  count: number;
+};
+
 export interface items {
-  items: any[];
+  items: item[];
   totalPrice: number;
   currentPortfolioPrice: number;
 }
@@ -12,8 +19,8 @@ export interface items {
 const { items, totalPrice } = getPortfolioFromLS();
 
 const initialState: items = {
-  totalPrice,
   items,
+  totalPrice,
   currentPortfolioPrice: 0,
 };
 
@@ -32,7 +39,6 @@ export const portfolioSlice = createSlice({
           count: +action.payload.amount,
         });
       }
-
       state.totalPrice = calcTotalPrice(state.items);
     },
 

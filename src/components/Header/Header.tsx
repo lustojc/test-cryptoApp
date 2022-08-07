@@ -6,6 +6,12 @@ import { useAppSelector } from '../../hooks/hooks';
 
 import { Modal } from '../Modal/Modal';
 
+interface popularCoins {
+  priceUsd: string;
+  name: string;
+  id: string;
+}
+
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
@@ -35,7 +41,7 @@ export default function Header() {
               <h1 className="header__title">Cryptocurrency App</h1>
             </Link>
             <div className="header-popular">
-              {allCoins.slice(0, 3).map((el: any) => (
+              {allCoins.slice(0, 3).map((el: popularCoins) => (
                 <div className="header-popular__coin" key={el.id}>
                   {el.name}: {parseFloat(el.priceUsd).toFixed(2)}$
                 </div>

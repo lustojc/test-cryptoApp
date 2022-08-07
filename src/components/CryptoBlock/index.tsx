@@ -11,6 +11,18 @@ import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
 import Pagination from '../Pagination';
 import AddButton from '../Button/AddButton';
 
+interface Coin {
+  id: number;
+  rank: string;
+  name: string;
+  priceUsd: string;
+  vwap24Hr: string;
+  marketCapUsd: string;
+  volumeUsd24Hr: string;
+  supply: string;
+  changePercent24Hr: string;
+}
+
 export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinsPerPage] = useState<number>(10);
@@ -59,7 +71,7 @@ export default function CryptoBlock() {
           </ul>
         </div>
         <div>
-          {currentCoins.map((coin: any) => (
+          {currentCoins.map((coin: Coin) => (
             <div key={coin.rank} className="crypto-block">
               <div>
                 <Link to={'/coin/' + coin.id} state={{ coinId: coin.id }}>
@@ -92,7 +104,7 @@ export default function CryptoBlock() {
               <div>
                 <AddButton
                   onClickAdd={onClickAdd}
-                  rank={+coin.rank}
+                  rank={coin.rank}
                   name={coin.name}
                   price={+coin.priceUsd}
                   text={'+'}

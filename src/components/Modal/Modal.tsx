@@ -3,7 +3,7 @@ import PortfolioItem from '../PortfolioItem/PortfolioItem';
 import styles from './modal.module.scss';
 
 interface props {
-  setModalActive: any;
+  setModalActive: (state: boolean) => void;
 }
 
 export const Modal = ({ setModalActive }: props) => {

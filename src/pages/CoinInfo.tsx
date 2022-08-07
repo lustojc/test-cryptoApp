@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -11,10 +11,14 @@ import { totalPorfolioPrice } from '../utils/calcCurrentPrice';
 import AddButton from '../components/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
 
+interface LocationState {
+  coinId: string;
+}
+
 export default function CoinInfo() {
   const location = useLocation();
 
-  const { coinId }: any = location.state;
+  const { coinId } = location.state as LocationState;
 
   const dispatch = useAppDispatch();
 
@@ -52,15 +56,13 @@ export default function CoinInfo() {
               <div className="info-block" key={el.rank}>
                 <ul>
                   <li className="info-block__name">Name: {el.name}</li>
-                  <li className="info-block__price">
-                    Price now: {parseFloat(el.priceUsd).toFixed(2)}$
-                  </li>
+                  <li className="info-block__price">Price now: {(+el.priceUsd).toFixed(2)}$</li>
                 </ul>
               </div>
               <div>
                 <AddButton
                   onClickAdd={onClickAdd}
-                  rank={+el.rank}
+                  rank={el.rank}
                   name={el.name}
                   price={+el.priceUsd}
                   text={'+'}

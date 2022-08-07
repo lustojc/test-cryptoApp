@@ -2,12 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import axios from 'axios';
 
-export const fetchCoins: any = createAsyncThunk('coins/fetchAll', async () => {
+export const fetchCoins = createAsyncThunk('coins/fetchAll', async () => {
   const { data } = await axios.get(`https://api.coincap.io/v2/assets`);
   return data;
 });
 
-interface coins {
+export interface coins {
   coins: [];
   status: 'loading' | 'success' | 'error';
 }
@@ -25,19 +25,20 @@ export const coinSlice = createSlice({
       state.coins = action.payload;
     },
   },
-  extraReducers: {
-    [fetchCoins.pending]: (state: coins) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchCoins.pending, (state: coins) => {
       state.status = 'loading';
       state.coins = [];
-    },
-    [fetchCoins.fulfilled]: (state: coins, action) => {
+    });
+
+    builder.addCase(fetchCoins.fulfilled, (state: coins, action) => {
       state.coins = action.payload.data;
       state.status = 'success';
-    },
-    [fetchCoins.refected]: (state: coins) => {
-      state.status = 'error';
+    });
+    builder.addCase(fetchCoins.rejected, (state: coins) => {
       state.coins = [];
-    },
+      state.status = 'error';
+    });
   },
 });
 
