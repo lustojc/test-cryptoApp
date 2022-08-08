@@ -11,6 +11,8 @@ import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
 import Pagination from '../Pagination';
 import AddButton from '../Button/AddButton';
 
+import { shortPrices, shortLowValue } from '../../utils/shortPrices';
+
 interface Coin {
   id: number;
   rank: string;
@@ -78,17 +80,11 @@ export default function CryptoBlock() {
                   <ul className="crypto-block__info" key={uuidv4()}>
                     <li className="crypto-block__rank">{coin.rank}</li>
                     <li className="crypto-block__title">{coin.name}</li>
-                    <li className="crypto-block__price">${parseFloat(coin.priceUsd).toFixed(2)}</li>
-                    <li className="crypto-block__marketCap">
-                      ${(parseFloat(coin.marketCapUsd) / 1000000000).toFixed(2)}b
-                    </li>
-                    <li className="crypto-block__vwap">${parseFloat(coin.vwap24Hr).toFixed(2)}</li>
-                    <li className="crypto-block__supply">
-                      ${(parseFloat(coin.supply) / 1000000).toFixed(2)}m
-                    </li>
-                    <li className="crypto-block__volume">
-                      ${(parseFloat(coin.volumeUsd24Hr) / 1000000000).toFixed(2)}b
-                    </li>
+                    <li className="crypto-block__price">${shortLowValue(coin.priceUsd)}</li>
+                    <li className="crypto-block__marketCap">${shortPrices(coin.marketCapUsd)}</li>
+                    <li className="crypto-block__vwap">${shortLowValue(coin.vwap24Hr)}</li>
+                    <li className="crypto-block__supply">${shortPrices(coin.supply)}</li>
+                    <li className="crypto-block__volume">${shortPrices(coin.volumeUsd24Hr)}</li>
                     <li
                       className="crypto-block__volume"
                       style={
@@ -96,7 +92,7 @@ export default function CryptoBlock() {
                           ? { color: 'red' }
                           : { color: 'green' }
                       }>
-                      {parseFloat(coin.changePercent24Hr).toFixed(2)}%
+                      {(+coin.changePercent24Hr).toFixed(2)}%
                     </li>
                   </ul>
                 </Link>

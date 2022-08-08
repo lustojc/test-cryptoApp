@@ -2,6 +2,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { item, removeItem } from '../../redux/slices/portfolioSlice';
 
+import { shortLowValue } from '../../utils/shortPrices';
+
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
   const userCoins = useAppSelector((state) => state.portfolioSlice.items);
@@ -28,7 +30,9 @@ const PortfolioItem = () => {
         <div key={coin.id} className="portfolio-block">
           <div className="portfolio-block__rank">{coin.id}.</div>
           <div className="portfolio-block__title">{coin.title}</div>
-          <div className="portfolio-block__price">{(coin.price * coin.count).toFixed(2)}$</div>
+          <div className="portfolio-block__price">
+            {shortLowValue((coin.price * coin.count).toString())}$
+          </div>
           <div className="portfolio-block__count">{coin.count.toFixed(3)}</div>
           <div
             onClick={() => onClickRemove(coin.id, coin.price, coin.count)}

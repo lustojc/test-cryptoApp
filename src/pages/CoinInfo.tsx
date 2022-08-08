@@ -10,6 +10,7 @@ import { totalPorfolioPrice } from '../utils/calcCurrentPrice';
 
 import AddButton from '../components/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
+import { shortLowValue } from '../utils/shortPrices';
 
 interface LocationState {
   coinId: string;
@@ -56,7 +57,9 @@ export default function CoinInfo() {
               <div className="info-block" key={el.rank}>
                 <ul>
                   <li className="info-block__name">Name: {el.name}</li>
-                  <li className="info-block__price">Price now: {(+el.priceUsd).toFixed(2)}$</li>
+                  <li className="info-block__price">
+                    Price now: {shortLowValue(el.priceUsd.toString())}$
+                  </li>
                 </ul>
               </div>
               <div>
