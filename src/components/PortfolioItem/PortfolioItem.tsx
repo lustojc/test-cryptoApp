@@ -33,7 +33,7 @@ const PortfolioItem = () => {
           <div className="portfolio-block__price">
             {shortLowValue((coin.price * coin.count).toString())}$
           </div>
-          <div className="portfolio-block__count">{coin.count.toFixed(3)}</div>
+          <div className="portfolio-block__count">{coin.count?.toFixed(3)}</div>
           <div
             onClick={() => onClickRemove(coin.id, coin.price, coin.count)}
             className="portfolio-block__deleteBtn">

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-import { addItems, getCurrentPrice } from '../../redux/slices/portfolioSlice';
+import { getCurrentPrice } from '../../redux/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
 
 import Pagination from '../Pagination';
@@ -33,17 +33,6 @@ export default function CryptoBlock() {
 
   const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
-
-  const onClickAdd = (id: number, title: string, price: number) => {
-    const amount = prompt('How many coins do you want to add to your portfolio?');
-    const item = {
-      id,
-      title,
-      price,
-      amount,
-    };
-    dispatch(addItems(item));
-  };
 
   useEffect(() => {
     dispatch(getCurrentPrice(totalPorfolioPrice(allCoins, items)));
@@ -98,13 +87,7 @@ export default function CryptoBlock() {
                 </Link>
               </div>
               <div>
-                <AddButton
-                  onClickAdd={onClickAdd}
-                  rank={coin.rank}
-                  name={coin.name}
-                  price={+coin.priceUsd}
-                  text={'+'}
-                />
+                <AddButton rank={coin.rank} name={coin.name} price={+coin.priceUsd} text={'+'} />
               </div>
             </div>
           ))}

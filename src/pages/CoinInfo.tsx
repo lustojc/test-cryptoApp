@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 import { fetchCurrentCoinInfo, fetchPriceInterval } from '../redux/slices/chosenCoinSlice';
-import { addItems, getCurrentPrice } from '../redux/slices/portfolioSlice';
+import { getCurrentPrice } from '../redux/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../utils/calcCurrentPrice';
 
 import AddButton from '../components/Button/AddButton';
@@ -27,17 +27,6 @@ export default function CoinInfo() {
 
   const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
-
-  const onClickAdd = (id: number, title: string, price: number) => {
-    const amount = prompt('How many coins do you want to add to your portfolio?');
-    const item = {
-      id,
-      title,
-      price,
-      amount,
-    };
-    dispatch(addItems(item));
-  };
 
   useEffect(() => {
     dispatch(getCurrentPrice(totalPorfolioPrice(allCoins, items)));
@@ -63,13 +52,7 @@ export default function CoinInfo() {
                 </ul>
               </div>
               <div>
-                <AddButton
-                  onClickAdd={onClickAdd}
-                  rank={el.rank}
-                  name={el.name}
-                  price={+el.priceUsd}
-                  text={'+'}
-                />
+                <AddButton rank={el.rank} name={el.name} price={+el.priceUsd} text={'+'} />
               </div>
             </div>
             <PriceChart name={el.name} coinPriceInterval={coinPriceInterval} />

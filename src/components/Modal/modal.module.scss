@@ -10,8 +10,8 @@
   top: 0;
   left: 0;
   background: #252424cc;
-  height: 100%;
   width: 100vw;
+  height: 200vh;
 }
 
 .modal {
@@ -67,11 +67,54 @@
   text-align: center;
 }
 
+.headingInput {
+  margin: 0;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 36px;
+  text-align: center;
+}
+
 .modalContent {
   padding: 10px;
   font-size: 14px;
   color: #2c3e50;
   text-align: center;
+
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+
+    input {
+      border-radius: 10px;
+      border: 1px solid gray;
+      width: 300px;
+      padding: 10px;
+      font-size: 24px;
+
+      @media (max-width: 480px) {
+        width: 200px;
+        font-size: 14px;
+      }
+    }
+
+    button {
+      border-radius: 10px;
+      margin-left: 20px;
+      width: 70px;
+      height: 50px;
+      background-color: gray;
+      color: white;
+      cursor: pointer;
+
+      @media (max-width: 480px) {
+        width: 50px;
+        height: 30px;
+      }
+    }
+  }
 }
 
 .closeBtn {
