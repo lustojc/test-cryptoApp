@@ -1,4 +1,4 @@
-import PortfolioItem from '../PortfolioItem/PortfolioItem';
+import PortfolioItem from '../../PortfolioItem/PortfolioItem';
 
 import styles from './modal.module.scss';
 

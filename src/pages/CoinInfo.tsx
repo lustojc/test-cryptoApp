@@ -6,11 +6,12 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 import { fetchCurrentCoinInfo, fetchPriceInterval } from '../redux/slices/chosenCoinSlice';
 import { getCurrentPrice } from '../redux/slices/portfolioSlice';
-import { totalPorfolioPrice } from '../utils/calcCurrentPrice';
+import { totalPorfolioPrice } from '../libs/calcCurrentPrice';
 
-import AddButton from '../components/Button/AddButton';
+import AddButton from '../components/generic/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
-import { shortLowValue } from '../utils/shortPrices';
+
+import { formatLowPrice } from '../libs/formatPrices';
 
 interface LocationState {
   coinId: string;
@@ -47,7 +48,7 @@ export default function CoinInfo() {
                 <ul>
                   <li className="info-block__name">Name: {el.name}</li>
                   <li className="info-block__price">
-                    Price now: {shortLowValue(el.priceUsd.toString())}$
+                    Price now: {formatLowPrice(el.priceUsd.toString())}$
                   </li>
                 </ul>
               </div>

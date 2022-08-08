@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { addItems } from '../../redux/slices/portfolioSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { addItems } from '../../../redux/slices/portfolioSlice';
 import InputForm from '../Modal/ModalInput';
 
 interface buttonProps {

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { item, removeItem } from '../../redux/slices/portfolioSlice';
 
-import { shortLowValue } from '../../utils/shortPrices';
+import { formatLowPrice } from '../../libs/formatPrices';
 
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ const PortfolioItem = () => {
           <div className="portfolio-block__rank">{coin.id}.</div>
           <div className="portfolio-block__title">{coin.title}</div>
           <div className="portfolio-block__price">
-            {shortLowValue((coin.price * coin.count).toString())}$
+            {formatLowPrice((coin.price * coin.count).toString())}$
           </div>
           <div className="portfolio-block__count">{coin.count?.toFixed(3)}</div>
           <div

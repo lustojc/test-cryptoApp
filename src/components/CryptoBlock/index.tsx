@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import { getCurrentPrice } from '../../redux/slices/portfolioSlice';
-import { totalPorfolioPrice } from '../../utils/calcCurrentPrice';
+import { totalPorfolioPrice } from '../../libs/calcCurrentPrice';
 
 import Pagination from '../Pagination';
-import AddButton from '../Button/AddButton';
+import AddButton from '../generic/Button/AddButton';
 
-import { shortPrices, shortLowValue } from '../../utils/shortPrices';
+import { formatPrices, formatLowPrice } from '../../libs/formatPrices';
 
 interface Coin {
   id: number;
@@ -69,11 +69,11 @@ export default function CryptoBlock() {
                   <ul className="crypto-block__info" key={uuidv4()}>
                     <li className="crypto-block__rank">{coin.rank}</li>
                     <li className="crypto-block__title">{coin.name}</li>
-                    <li className="crypto-block__price">${shortLowValue(coin.priceUsd)}</li>
-                    <li className="crypto-block__marketCap">${shortPrices(coin.marketCapUsd)}</li>
-                    <li className="crypto-block__vwap">${shortLowValue(coin.vwap24Hr)}</li>
-                    <li className="crypto-block__supply">${shortPrices(coin.supply)}</li>
-                    <li className="crypto-block__volume">${shortPrices(coin.volumeUsd24Hr)}</li>
+                    <li className="crypto-block__price">${formatLowPrice(coin.priceUsd)}</li>
+                    <li className="crypto-block__marketCap">${formatPrices(coin.marketCapUsd)}</li>
+                    <li className="crypto-block__vwap">${formatLowPrice(coin.vwap24Hr)}</li>
+                    <li className="crypto-block__supply">${formatPrices(coin.supply)}</li>
+                    <li className="crypto-block__volume">${formatPrices(coin.volumeUsd24Hr)}</li>
                     <li
                       className="crypto-block__volume"
                       style={

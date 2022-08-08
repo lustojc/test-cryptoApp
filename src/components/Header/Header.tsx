@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks/hooks';
-import { shortLowValue } from '../../utils/shortPrices';
+import { formatLowPrice } from '../../libs/formatPrices';
 
-import { Modal } from '../Modal/Modal';
+import { Modal } from '../generic/Modal/Modal';
 
 interface popularCoins {
   priceUsd: string;
@@ -63,7 +63,7 @@ export default function Header() {
             <div className="header-popular">
               {allCoins.slice(0, 3).map((el: popularCoins) => (
                 <div className="header-popular__coin" key={el.id}>
-                  {el.name}: {shortLowValue(el.priceUsd)}$
+                  {el.name}: {formatLowPrice(el.priceUsd)}$
                 </div>
               ))}
             </div>

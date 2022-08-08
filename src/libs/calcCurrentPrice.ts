@@ -1,4 +1,4 @@
-import { item } from './../redux/slices/portfolioSlice';
+import { item } from '../redux/slices/portfolioSlice';
 
 interface allCoins {
   rank: string;
