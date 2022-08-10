@@ -1,5 +1,3 @@
-import styles from '../Pagination/Pagination.module.scss';
-
 interface props {
   coinsPerPage: number;
   totalCoins: number;
@@ -14,11 +12,11 @@ export default function Pagination({ coinsPerPage, totalCoins, paginate }: props
   }
 
   return (
-    <div className={styles.root}>
-      <ul className={styles.pagination_wrapper}>
+    <div className="pagination-block">
+      <ul className="pagination-block__content">
         {pageNumbers.map((el: number) => (
-          <li className="page-item" key={el}>
-            <a className="page-link" onClick={() => paginate(el)}>
+          <li className="pagination-block__content-item" key={el}>
+            <a className="pagination-block__content-link" onClick={() => paginate(el)}>
               {el}
             </a>
           </li>

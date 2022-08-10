@@ -1,10 +1,8 @@
 .info-block {
-  &-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
+  display: flex;
   margin-left: 30px;
+  align-items: center;
+
   &__name {
     color: black;
     font-size: 30px;

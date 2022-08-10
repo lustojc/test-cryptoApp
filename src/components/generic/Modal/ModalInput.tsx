@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from './modal.module.scss';
+// import styles from './modal.module.scss';
 
 interface InputFormProps {
   onClickAdd: (value: string) => void;
@@ -16,19 +16,19 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
 
   return (
     <>
-      <div className={styles.modalBackup} onClick={() => setFormActive(false)}>
-        <div className={styles.centered} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.modal}>
-            <div className={styles.modalHeader}>
-              <h5 className={styles.headingInput}>
+      <div className="modal-block" onClick={() => setFormActive(false)}>
+        <div className="modal-block__wrapper" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-block__content">
+            <div className="modal-block__content-title">
+              <h5 className="modal-block__content-title__main">
                 How many coins do you want to add to your portfolio?
               </h5>
             </div>
-            <button className={styles.closeBtn} onClick={() => setFormActive(false)}>
+            <button className="modal-block__content-closeBtn" onClick={() => setFormActive(false)}>
               X
             </button>
-            <div className={styles.modalContent}>
-              <div className={styles.inputContainer}>
+            <div className="modal-block__content-items">
+              <div className="modal-block__content-items__container">
                 <input
                   type="text"
                   value={inputValue}

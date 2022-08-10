@@ -11,8 +11,12 @@ export const formatPrices = (price: string) => {
 };
 
 export const formatLowPrice = (value: string) => {
-  if (+value < 0.001) {
+  if (value === null) {
+    return '  -';
+  } else if (+value < 0.001) {
     return `${(+value).toFixed(6)}`;
+  } else if (+value < 0.01) {
+    return `${(+value).toFixed(4)}`;
   } else {
     return `${(+value).toFixed(2)}`;
   }

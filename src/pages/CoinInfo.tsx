@@ -43,8 +43,8 @@ export default function CoinInfo() {
       <div>
         {coinInfo.map((el) => (
           <>
-            <div className="info-block-wrapper">
-              <div className="info-block" key={el.rank}>
+            <div className="info-block">
+              <div key={el.rank}>
                 <ul>
                   <li className="info-block__name">Name: {el.name}</li>
                   <li className="info-block__price">

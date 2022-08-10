@@ -54,21 +54,20 @@ export default function Header() {
 
   return (
     <div className="header">
-      <div className="container">
-        <div className="header__info">
-          <div>
-            <Link to="/">
-              <h1 className="header__title">Cryptocurrency App</h1>
-            </Link>
-            <div className="header-popular">
-              {allCoins.slice(0, 3).map((el: popularCoins) => (
-                <div className="header-popular__coin" key={el.id}>
-                  {el.name}: {formatLowPrice(el.priceUsd)}$
-                </div>
-              ))}
-            </div>
+      <div className="header-container">
+        <div>
+          <Link to="/">
+            <h1 className="header__title">Cryptocurrency App</h1>
+          </Link>
+          <div className="header-popular">
+            {allCoins.slice(0, 3).map((el: popularCoins) => (
+              <div className="header-popular__coin" key={el.id}>
+                {el.name}: {formatLowPrice(el.priceUsd)}$
+              </div>
+            ))}
           </div>
         </div>
+
         <div className="header-portfolio" onClick={() => setModalActive(true)}>
           <div className="header-portfolio__title">My Portfolio</div>
           <div className="header-portfolio__info">

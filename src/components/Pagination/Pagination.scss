@@ -1,11 +1,12 @@
-.root {
+.pagination-block {
   margin: 40px 50px;
   padding-bottom: 40px;
 
-  li {
-    display: inline-flex;
-
-    a {
+  &__content {
+    &-item {
+      display: inline-flex;
+    }
+    &-link {
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -33,9 +34,9 @@
         color: #fff;
       }
     }
-  }
 
-  @media (max-width: 445px) {
-    margin: 20px 25px;
+    @media (max-width: 445px) {
+      margin: 20px 25px;
+    }
   }
 }
