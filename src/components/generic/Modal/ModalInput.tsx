@@ -11,7 +11,12 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
   const [inputValue, setInputValue] = useState<string>('');
 
   const getInputValue = (value: string) => {
-    setInputValue(value);
+    const validatedValue = value.match(/[0-9]+[.]?[0-9]*/g)?.toString();
+    if (validatedValue) {
+      setInputValue(validatedValue);
+    } else if (value === '') {
+      setInputValue(value);
+    }
   };
 
   return (

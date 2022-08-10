@@ -16,9 +16,11 @@ interface popularCoins {
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
-  const price = useAppSelector((state) => state.portfolioSlice.totalPrice.toFixed(2));
+  const price = useAppSelector((state) =>
+    formatLowPrice(state.portfolioSlice.totalPrice.toString()),
+  );
   const currentPrice = useAppSelector((state) =>
-    state.portfolioSlice.currentPortfolioPrice.toFixed(2),
+    formatLowPrice(state.portfolioSlice.currentPortfolioPrice.toString()),
   );
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
