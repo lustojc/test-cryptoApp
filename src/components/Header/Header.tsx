@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks/hooks';
-import { formatLowPrice } from '../../libs/formatPrices';
+import { useAppSelector } from '../../libs/hooks/hooks';
+import { formatLowPrice } from '../../libs/helpers/formatPrices';
 
 import { Modal } from '../generic/Modal/Modal';
 

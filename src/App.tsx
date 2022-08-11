@@ -5,9 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import CryptoBlock from './components/CryptoBlock';
 
-import { useAppDispatch } from './hooks/hooks';
+import { useAppDispatch } from './libs/hooks/hooks';
 
-import { fetchCoins } from './redux/slices/coinSlice';
+import { fetchCoins } from './store/slices/coinSlice';
 
 import './scss/app.scss';
 import CoinInfo from './pages/CoinInfo';

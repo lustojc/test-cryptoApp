@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { calcTotalPrice } from '../../libs/calcTotalPrice';
-import { getPortfolioFromLS } from '../../libs/getPortfolioFromLS';
+import { calcTotalPrice } from '../../libs/helpers/calcTotalPrice';
+import { getPortfolioFromLS } from '../../libs/helpers/getPortfolioFromLS';
 
 export type item = {
   id: number;

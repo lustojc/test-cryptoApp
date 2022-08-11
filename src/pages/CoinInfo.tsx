@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../libs/hooks/hooks';
 
-import { fetchCurrentCoinInfo, fetchPriceInterval } from '../redux/slices/chosenCoinSlice';
-import { getCurrentPrice } from '../redux/slices/portfolioSlice';
-import { totalPorfolioPrice } from '../libs/calcCurrentPrice';
+import { fetchCurrentCoinInfo, fetchPriceInterval } from '../store/slices/chosenCoinSlice';
+import { getCurrentPrice } from '../store/slices/portfolioSlice';
+import { totalPorfolioPrice } from '../libs/helpers/calcCurrentPrice';
 
 import AddButton from '../components/generic/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
 
-import { formatLowPrice } from '../libs/formatPrices';
+import { formatLowPrice } from '../libs/helpers/formatPrices';
 
 interface LocationState {
   coinId: string;

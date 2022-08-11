@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-// import styles from './modal.module.scss';
-
 interface InputFormProps {
   onClickAdd: (value: string) => void;
   setFormActive: (value: boolean) => void;

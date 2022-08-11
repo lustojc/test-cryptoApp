@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 
-import { getCurrentPrice } from '../../redux/slices/portfolioSlice';
-import { totalPorfolioPrice } from '../../libs/calcCurrentPrice';
+import { getCurrentPrice } from '../../store/slices/portfolioSlice';
+import { totalPorfolioPrice } from '../../libs/helpers/calcCurrentPrice';
 
 import Pagination from '../Pagination';
 import AddButton from '../generic/Button/AddButton';
 
-import { formatPrices, formatLowPrice } from '../../libs/formatPrices';
+import { formatPrices, formatLowPrice } from '../../libs/helpers/formatPrices';
 
 interface Coin {
   id: number;

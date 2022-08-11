@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 
-import { item, removeItem } from '../../redux/slices/portfolioSlice';
+import { item, removeItem } from '../../store/slices/portfolioSlice';
 
-import { formatLowPrice } from '../../libs/formatPrices';
+import { formatLowPrice } from '../../libs/helpers/formatPrices';
 
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
