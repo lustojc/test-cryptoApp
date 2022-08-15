@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface InputFormProps {
   onClickAdd: (value: string) => void;
@@ -7,6 +7,8 @@ interface InputFormProps {
 
 export default function InputForm({ onClickAdd, setFormActive }: InputFormProps) {
   const [inputValue, setInputValue] = useState<string>('');
+  const [errorColor, setErrorColor] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const getInputValue = (value: string) => {
     const validatedValue = value.match(/[0-9]+[.]?[0-9]*/g)?.toString();
@@ -16,6 +18,19 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
       setInputValue(value);
     }
   };
+
+  useEffect(() => {
+    if (inputValue === '') {
+      setErrorMessage('');
+      setErrorColor('black');
+    } else if (+inputValue === 0) {
+      setErrorColor('red');
+      setErrorMessage('You entered an invalid value!');
+    } else {
+      setErrorMessage('The value is correct!');
+      setErrorColor('green');
+    }
+  }, [inputValue, errorMessage]);
 
   return (
     <>
@@ -33,12 +48,15 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
             <div className="modal-block__content-items">
               <div className="modal-block__content-items__container">
                 <input
+                  style={{ borderColor: errorColor }}
                   type="text"
+                  maxLength={8}
                   value={inputValue}
                   onChange={(e) => getInputValue(e.target.value)}
                 />
                 <button onClick={() => onClickAdd(inputValue)}>Add</button>
               </div>
+              <div style={{ color: errorColor }}>{errorMessage}</div>
             </div>
           </div>
         </div>
