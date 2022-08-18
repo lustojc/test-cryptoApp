@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Message from '../Message/Message';
 
 interface InputFormProps {
   onClickAdd: (value: string) => void;
@@ -56,7 +57,7 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                 />
                 <button onClick={() => onClickAdd(inputValue)}>Add</button>
               </div>
-              <div style={{ color: errorColor }}>{errorMessage}</div>
+              {errorMessage && <Message color={errorColor} message={errorMessage} fontSize={14} />}
             </div>
           </div>
         </div>

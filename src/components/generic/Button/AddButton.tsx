@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../libs/hooks/hooks';
 import { addItems } from '../../../store/slices/portfolioSlice';
 import InputForm from '../Modal/ModalInput';
+import Button from './Button';
 
 interface buttonProps {
   rank: string;
@@ -49,11 +50,19 @@ export default function AddButton({ rank, name, price, text }: buttonProps) {
     return () => window.removeEventListener('keydown', closeModal);
   }, []);
 
+  const onClickBtn = () => {
+    setFormActive(!formActive);
+  };
+
   return (
     <div>
-      <button className="crypto-block__btn" onClick={() => setFormActive(!formActive)}>
-        {text}
-      </button>
+      <Button
+        text={'+'}
+        backgroundColor={'rgb(128, 130, 8)'}
+        color={'white'}
+        size={'md'}
+        onClickBtn={onClickBtn}
+      />
       {formActive && <InputForm onClickAdd={onClickAdd} setFormActive={setFormActive} />}
     </div>
   );

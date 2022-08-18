@@ -12,26 +12,39 @@ import { Line } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-interface chartProps {
+export interface chartProps {
   name: string;
   coinPriceInterval: [];
+  borderColor: string;
+  backgroundColor: string;
+  responsive: boolean;
+  display: true | false;
+  headerPostition?: 'top' | 'right' | 'bottom' | 'left';
 }
 
-export default function PriceChart({ name, coinPriceInterval }: chartProps) {
+export default function PriceChart({
+  name,
+  coinPriceInterval,
+  borderColor = 'rgb(255, 99, 132)',
+  backgroundColor = 'rgba(255, 99, 132, 0.5)',
+  responsive = true,
+  display = true,
+  headerPostition = 'top',
+}: chartProps) {
   const options = {
-    responsive: true,
+    responsive: responsive,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: headerPostition,
       },
       title: {
-        display: true,
+        display: display,
         text: `${name} price chart!`,
       },
     },
   };
 
-  const labels = coinPriceInterval.map((el: { time: number }) =>
+  const labels = coinPriceInterval?.map((el: { time: number }) =>
     new Date(el.time).toLocaleDateString('en-GB'),
   );
 
@@ -40,9 +53,9 @@ export default function PriceChart({ name, coinPriceInterval }: chartProps) {
     datasets: [
       {
         label: name,
-        data: coinPriceInterval.map((el: { priceUsd: string }) => el.priceUsd),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        data: coinPriceInterval?.map((el: { priceUsd: string }) => el.priceUsd),
+        borderColor: borderColor,
+        backgroundColor: backgroundColor,
       },
     ],
   };

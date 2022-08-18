@@ -56,7 +56,14 @@ export default function CoinInfo() {
                 <AddButton rank={el.rank} name={el.name} price={+el.priceUsd} text={'+'} />
               </div>
             </div>
-            <PriceChart name={el.name} coinPriceInterval={coinPriceInterval} />
+            <PriceChart
+              name={el.name}
+              coinPriceInterval={coinPriceInterval}
+              borderColor={'rgb(255, 99, 132)'}
+              backgroundColor={'rgba(255, 99, 132, 0.5)'}
+              responsive={true}
+              display={true}
+            />
           </>
         ))}
       </div>
