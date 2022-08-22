@@ -29,6 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cypress": "cypress open",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
@@ -74,6 +75,7 @@
     "@storybook/testing-library": "0.0.13",
     "@types/uuid": "^8.3.4",
     "babel-plugin-named-exports-order": "0.0.2",
+    "cypress": "^10.6.0",
     "prop-types": "^15.8.1",
     "webpack": "^5.74.0"
   }
