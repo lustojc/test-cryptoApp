@@ -35,7 +35,7 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
 
   return (
     <>
-      <div className="modal-block" onClick={() => setFormActive(false)}>
+      <div className="modal-block" data-cy="modal-block" onClick={() => setFormActive(false)}>
         <div className="modal-block__wrapper" onClick={(e) => e.stopPropagation()}>
           <div className="modal-block__content">
             <div className="modal-block__content-title">
@@ -43,7 +43,10 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                 How many coins do you want to add to your portfolio?
               </h5>
             </div>
-            <button className="modal-block__content-closeBtn" onClick={() => setFormActive(false)}>
+            <button
+              className="modal-block__content-closeBtn"
+              data-cy="closeBtn"
+              onClick={() => setFormActive(false)}>
               X
             </button>
             <div className="modal-block__content-items">
@@ -54,8 +57,11 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                   maxLength={8}
                   value={inputValue}
                   onChange={(e) => getInputValue(e.target.value)}
+                  data-cy="input"
                 />
-                <button onClick={() => onClickAdd(inputValue)}>Add</button>
+                <button data-cy="addCoinsBtn" onClick={() => onClickAdd(inputValue)}>
+                  Add
+                </button>
               </div>
               {errorMessage && <Message color={errorColor} message={errorMessage} fontSize={14} />}
             </div>

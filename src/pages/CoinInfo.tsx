@@ -46,7 +46,9 @@ export default function CoinInfo() {
             <div className="info-block">
               <div key={el.rank}>
                 <ul>
-                  <li className="info-block__name">Name: {el.name}</li>
+                  <li className="info-block__name" data-cy="info-block-name">
+                    Name: {el.name}
+                  </li>
                   <li className="info-block__price">
                     Price now: {formatLowPrice(el.priceUsd.toString())}$
                   </li>

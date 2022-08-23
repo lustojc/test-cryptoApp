@@ -3,6 +3,7 @@ interface props {
   backgroundColor: string;
   color: string;
   size: 'lg' | 'md' | 'sm';
+  dataAtt: string;
   onClickBtn: () => void;
 }
 
@@ -11,6 +12,7 @@ export default function Button({
   backgroundColor = 'black',
   color = 'white',
   size = 'md',
+  dataAtt,
   onClickBtn,
 }: props) {
   let scale = 1;
@@ -25,7 +27,7 @@ export default function Button({
     color,
   };
   return (
-    <button onClick={onClickBtn} className="crypto-block__btn" style={style}>
+    <button onClick={onClickBtn} data-cy={dataAtt} className="crypto-block__btn" style={style}>
       {text}
     </button>
   );

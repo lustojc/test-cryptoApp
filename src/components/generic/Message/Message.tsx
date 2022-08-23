@@ -16,5 +16,9 @@ export default function Message({ color, message, fontSize, backgroundColor, fon
     fontStyle,
   };
 
-  return <div style={style}>{message}</div>;
+  return (
+    <div data-cy="errorMessage" style={style}>
+      {message}
+    </div>
+  );
 }

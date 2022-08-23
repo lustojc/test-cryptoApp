@@ -62,6 +62,7 @@ export default function AddButton({ rank, name, price, text }: buttonProps) {
         color={'white'}
         size={'md'}
         onClickBtn={onClickBtn}
+        dataAtt="addBtn"
       />
       {formActive && <InputForm onClickAdd={onClickAdd} setFormActive={setFormActive} />}
     </div>

@@ -7,13 +7,13 @@ interface props {
 export const Modal = ({ setModalActive }: props) => {
   return (
     <>
-      <div className="modal-block" onClick={() => setModalActive(false)}>
+      <div className="modal-block" data-cy='modal-block' onClick={() => setModalActive(false)}>
         <div className="modal-block__wrapper" onClick={(e) => e.stopPropagation()}>
           <div className="modal-block__content">
             <div className="modal-block__content-title">
               <h5>My Portfolio</h5>
             </div>
-            <button className="modal-block__content-closeBtn" onClick={() => setModalActive(false)}>
+            <button className="modal-block__content-closeBtn" data-cy='closeBtn' onClick={() => setModalActive(false)}>
               X
             </button>
             <div className="modal-block__content-items">

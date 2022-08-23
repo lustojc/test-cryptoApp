@@ -70,10 +70,15 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="header-portfolio" onClick={() => setModalActive(true)}>
+        <div
+          className="header-portfolio"
+          data-cy="header-portfolio"
+          onClick={() => setModalActive(true)}>
           <div className="header-portfolio__title">My Portfolio</div>
           <div className="header-portfolio__info">
-            <div className="header-portfolio__price">{currentPrice} USD </div>
+            <div data-cy="header-price" className="header-portfolio__price">
+              {currentPrice} USD{' '}
+            </div>
             <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
               {priceDiff > 0 ? '+' : ''}
               {priceDiff} $

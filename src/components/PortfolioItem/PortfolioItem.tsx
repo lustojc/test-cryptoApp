@@ -19,7 +19,7 @@ const PortfolioItem = () => {
   };
 
   return (
-    <div className="portfolio-wrapper">
+    <div data-cy="portfolio" className="portfolio-wrapper">
       <div className="portfolio-settings">
         <div>Rank</div>
         <div>Name</div>
@@ -27,14 +27,17 @@ const PortfolioItem = () => {
         <div>Amount</div>
       </div>
       {userCoins.map((coin: item) => (
-        <div key={coin.id} className="portfolio-block">
+        <div key={coin.id} data-cy="portfolio-item" className="portfolio-block">
           <div className="portfolio-block__rank">{coin.id}.</div>
           <div className="portfolio-block__title">{coin.title}</div>
           <div className="portfolio-block__price">
             {formatLowPrice((coin.price * coin.count).toString())}$
           </div>
-          <div className="portfolio-block__count">{formatLowPrice(coin.count?.toString())}</div>
+          <div data-cy="portfolio-item-count" className="portfolio-block__count">
+            {formatLowPrice(coin.count?.toString())}
+          </div>
           <div
+            data-cy="portfolio-deleteBtn"
             onClick={() => onClickRemove(coin.id, coin.price, coin.count)}
             className="portfolio-block__deleteBtn">
             X

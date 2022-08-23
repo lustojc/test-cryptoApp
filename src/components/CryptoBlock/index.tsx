@@ -66,9 +66,11 @@ export default function CryptoBlock() {
             <div key={coin.rank} className="crypto-block">
               <div>
                 <Link to={'/coin/' + coin.id} state={{ coinId: coin.id }}>
-                  <ul className="crypto-block__info" key={uuidv4()}>
+                  <ul className="crypto-block__info" data-cy="crypto-block-info" key={uuidv4()}>
                     <li className="crypto-block__rank">{coin.rank}</li>
-                    <li className="crypto-block__title">{coin.name}</li>
+                    <li className="crypto-block__title" data-cy="crypto-block-title">
+                      {coin.name}
+                    </li>
                     <li className="crypto-block__price">${formatLowPrice(coin.priceUsd)}</li>
                     <li className="crypto-block__marketCap">${formatPrices(coin.marketCapUsd)}</li>
                     <li className="crypto-block__vwap">${formatLowPrice(coin.vwap24Hr)}</li>
