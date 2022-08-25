@@ -26,7 +26,7 @@ export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
         price: +a.priceUsd,
       };
     } else {
-      item = {};
+      return coinsArr;
     }
     coinsArr.push(item);
   }

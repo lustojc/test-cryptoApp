@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test message component render message 1`] = `
+<div
+  data-cy="errorMessage"
+  style="display: inline; padding: 10px; background-color: red;"
+>
+  Correct value
+</div>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test button component render button 1`] = `
+<button
+  class="crypto-block__btn"
+  style="background-color: black; padding: 0.5rem 1rem; color: green;"
+>
+  Add
+</button>
+`;
