@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Work with my currency App', () => {
   beforeEach('visit my app', () => {
     cy.viewport(1920, 1080);
@@ -92,7 +94,7 @@ describe('Work with my currency App', () => {
 
     // Make sure the price in the header has changed
     cy.get('[data-cy="closeBtn"]').click();
-    cy.get('[data-cy="header-price"]').contains('0.00 USD');
+    cy.get('[data-cy="header-price"]').contains('0 USD');
   });
 
   it('open random coin and compare names', () => {
@@ -112,6 +114,7 @@ describe('Work with my currency App', () => {
 
             // Check
             cy.get('[data-cy="info-block-name"]').contains(`Name: ${coinName}`);
+            cy.screenshot({ overwrite: true });
             cy.visit('/');
           });
       });
