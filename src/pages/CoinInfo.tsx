@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -7,6 +7,9 @@ import { useAppDispatch, useAppSelector } from '../libs/hooks/hooks';
 import { fetchCurrentCoinInfo, fetchPriceInterval } from '../store/slices/chosenCoinSlice';
 import { getCurrentPrice } from '../store/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../libs/helpers/calcCurrentPrice';
+
+import { GET_ALL_COINS, GET_COIN_HISTORY, GET_ONE_COIN } from '../Apolo/query/coin';
+import { useQuery } from '@apollo/client';
 
 import AddButton from '../components/generic/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
@@ -24,24 +27,62 @@ export default function CoinInfo() {
 
   const dispatch = useAppDispatch();
 
-  const { coinInfo, coinPriceInterval } = useAppSelector((state) => state.choosenCoinSlice);
+  // const { coinInfo ,coinPriceInterval } = useAppSelector((state) => state.choosenCoinSlice);
 
-  const allCoins = useAppSelector((state) => state.coinSlice.coins);
+  // fetch coins using Apolo + GraphQl from localhost:4000
+  const [allCoins, setAllCoins] = useState<[]>([]);
+  const { data, loading } = useQuery(GET_ALL_COINS);
+
+  useEffect(() => {
+    if (!loading) {
+      setAllCoins(data.getAllCoins);
+    }
+  }, [data]);
+
+  // fetch choosen coin info using Apolo + GraphQl from localhost:4000 ////////////////////////////////
+  const [coinInfo, setCoinInfo] = useState<object[]>([]);
+  const { data: oneCoin, loading: loadingOneCoin } = useQuery(GET_ONE_COIN, {
+    variables: {
+      coin: coinId,
+    },
+  });
+
+  useEffect(() => {
+    if (!loadingOneCoin) {
+      setCoinInfo((prevValue: object[]) => [...prevValue, oneCoin.getCoinByName]);
+    }
+  }, [oneCoin]);
+
+  // fetch choosen coin history using Apolo + GraphQl from localhost:4000 ////////////////////////////////
+  const [coinPriceInterval, setCoinPriceInterval] = useState<[]>([]);
+  const { data: coinHistoryPrice, loading: loadingCoinHistory } = useQuery(GET_COIN_HISTORY, {
+    variables: {
+      coin: coinId,
+    },
+  });
+
+  useEffect(() => {
+    if (!loadingCoinHistory) {
+      setCoinPriceInterval(coinHistoryPrice.getCoinHistory);
+    }
+  }, [coinHistoryPrice]);
+
+  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   useEffect(() => {
     dispatch(getCurrentPrice(totalPorfolioPrice(allCoins, items)));
   }, [allCoins, items]);
 
-  useEffect(() => {
-    dispatch(fetchCurrentCoinInfo(coinId));
-    dispatch(fetchPriceInterval(coinId));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCurrentCoinInfo(coinId));
+  //   dispatch(fetchPriceInterval(coinId));
+  // }, []);
 
   return (
     <div>
       <div>
-        {coinInfo.map((el) => (
+        {coinInfo.map((el: any) => (
           <>
             <div className="info-block">
               <div key={el.rank}>

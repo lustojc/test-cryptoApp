@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -10,14 +10,17 @@ import { useAppDispatch } from './libs/hooks/hooks';
 import { fetchCoins } from './store/slices/coinSlice';
 
 import './scss/app.scss';
+
 import CoinInfo from './pages/CoinInfo';
 
 function App() {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchCoins());
-  }, []);
+  // fetch data using redux thunk
+
+  // useEffect(() => {
+  //   dispatch(fetchCoins());
+  // }, []);
 
   return (
     <div>

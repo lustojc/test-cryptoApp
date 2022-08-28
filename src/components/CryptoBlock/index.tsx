@@ -13,6 +13,9 @@ import AddButton from '../generic/Button/AddButton';
 
 import { formatPrices, formatLowPrice } from '../../libs/helpers/formatPrices';
 
+import { GET_ALL_COINS } from '../../Apolo/query/coin';
+import { useQuery } from '@apollo/client';
+
 interface Coin {
   id: number;
   rank: string;
@@ -29,9 +32,19 @@ export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinsPerPage] = useState<number>(10);
 
-  const dispatch = useAppDispatch();
+  // fetch coins using Apolo + GraphQl from localhost:4000
+  const [allCoins, setAllCoins] = useState<[]>([]);
+  const { data, loading } = useQuery(GET_ALL_COINS);
 
-  const allCoins = useAppSelector((state) => state.coinSlice.coins);
+  useEffect(() => {
+    if (!loading) {
+      setAllCoins(data.getAllCoins);
+    }
+  }, [data]);
+
+  // fetch coins using Redux-thunk
+  const dispatch = useAppDispatch();
+  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   useEffect(() => {
@@ -45,6 +58,10 @@ export default function CryptoBlock() {
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+
+  if (loading) {
+    return <h1>Loading......</h1>;
+  }
 
   return (
     <>

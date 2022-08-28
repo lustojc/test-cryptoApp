@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { GET_ALL_COINS } from '../../Apolo/query/coin';
+import { useQuery } from '@apollo/client';
+
 import { useAppSelector } from '../../libs/hooks/hooks';
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
 
@@ -24,7 +27,17 @@ export default function Header() {
   );
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
-  const allCoins = useAppSelector((state) => state.coinSlice.coins);
+  // fetch coins using Apolo + GraphQl from localhost:4000
+  const [allCoins, setAllCoins] = useState<[]>([]);
+  const { data, loading } = useQuery(GET_ALL_COINS);
+
+  useEffect(() => {
+    if (!loading) {
+      setAllCoins(data.getAllCoins);
+    }
+  }, [data]);
+
+  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
 
   const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 
