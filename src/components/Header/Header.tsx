@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { GET_ALL_COINS } from '../../Apolo/query/coin';
+import { GET_ALL_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
 
 import { useAppSelector } from '../../libs/hooks/hooks';
@@ -28,14 +28,7 @@ export default function Header() {
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   // fetch coins using Apolo + GraphQl from localhost:4000
-  const [allCoins, setAllCoins] = useState<[]>([]);
-  const { data, loading } = useQuery(GET_ALL_COINS);
-
-  useEffect(() => {
-    if (!loading) {
-      setAllCoins(data.getAllCoins);
-    }
-  }, [data]);
+  const { data } = useQuery(GET_ALL_COINS);
 
   // const allCoins = useAppSelector((state) => state.coinSlice.coins);
 
@@ -75,7 +68,7 @@ export default function Header() {
             <h1 className="header__title">Cryptocurrency App</h1>
           </Link>
           <div className="header-popular">
-            {allCoins.slice(0, 3).map((el: popularCoins) => (
+            {data?.getAllCoins.slice(0, 3).map((el: popularCoins) => (
               <div className="header-popular__coin" key={el.id}>
                 {el.name}: {formatLowPrice(el.priceUsd)}$
               </div>

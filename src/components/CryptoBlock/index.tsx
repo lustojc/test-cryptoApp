@@ -13,7 +13,7 @@ import AddButton from '../generic/Button/AddButton';
 
 import { formatPrices, formatLowPrice } from '../../libs/helpers/formatPrices';
 
-import { GET_ALL_COINS } from '../../Apolo/query/coin';
+import { GET_ALL_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
 
 interface Coin {

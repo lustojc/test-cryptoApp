@@ -8,7 +8,7 @@ import { fetchCurrentCoinInfo, fetchPriceInterval } from '../store/slices/chosen
 import { getCurrentPrice } from '../store/slices/portfolioSlice';
 import { totalPorfolioPrice } from '../libs/helpers/calcCurrentPrice';
 
-import { GET_ALL_COINS, GET_COIN_HISTORY, GET_ONE_COIN } from '../Apolo/query/coin';
+import { GET_ALL_COINS, GET_COIN_HISTORY, GET_ONE_COIN } from '../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
 
 import AddButton from '../components/generic/Button/AddButton';
@@ -30,14 +30,7 @@ export default function CoinInfo() {
   // const { coinInfo ,coinPriceInterval } = useAppSelector((state) => state.choosenCoinSlice);
 
   // fetch coins using Apolo + GraphQl from localhost:4000
-  const [allCoins, setAllCoins] = useState<[]>([]);
-  const { data, loading } = useQuery(GET_ALL_COINS);
-
-  useEffect(() => {
-    if (!loading) {
-      setAllCoins(data.getAllCoins);
-    }
-  }, [data]);
+  const { data } = useQuery(GET_ALL_COINS);
 
   // fetch choosen coin info using Apolo + GraphQl from localhost:4000 ////////////////////////////////
   const [coinInfo, setCoinInfo] = useState<object[]>([]);
@@ -71,8 +64,10 @@ export default function CoinInfo() {
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   useEffect(() => {
-    dispatch(getCurrentPrice(totalPorfolioPrice(allCoins, items)));
-  }, [allCoins, items]);
+    if (data?.getAllCoins) {
+      dispatch(getCurrentPrice(totalPorfolioPrice(data?.getAllCoins, items)));
+    }
+  }, [data?.getAllCoins, items]);
 
   // useEffect(() => {
   //   dispatch(fetchCurrentCoinInfo(coinId));
