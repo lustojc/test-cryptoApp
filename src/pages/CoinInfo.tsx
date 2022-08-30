@@ -15,9 +15,35 @@ import AddButton from '../components/generic/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
 
 import { formatLowPrice } from '../libs/helpers/formatPrices';
+import LineChart from '../components/LineChart/LineChart';
+
+import { QueryData } from '../components/CryptoBlock';
 
 interface LocationState {
   coinId: string;
+}
+
+interface coinInfo {
+  rank: string;
+  name: string;
+  priceUsd: string;
+}
+
+interface OneCoin {
+  getCoinByName: [coinInfo];
+}
+
+interface CoinId {
+  coin: string;
+}
+
+export interface CoinHistoryData {
+  priceUsd: string;
+  time: number;
+}
+
+export interface CoinHistoryPrice {
+  getCoinHistory: [CoinHistoryData];
 }
 
 export default function CoinInfo() {
@@ -27,14 +53,10 @@ export default function CoinInfo() {
 
   const dispatch = useAppDispatch();
 
-  // const { coinInfo ,coinPriceInterval } = useAppSelector((state) => state.choosenCoinSlice);
+  const { data } = useQuery<QueryData>(GET_ALL_COINS);
 
-  // fetch coins using Apolo + GraphQl from localhost:4000
-  const { data } = useQuery(GET_ALL_COINS);
-
-  // fetch choosen coin info using Apolo + GraphQl from localhost:4000 ////////////////////////////////
   const [coinInfo, setCoinInfo] = useState<object[]>([]);
-  const { data: oneCoin, loading: loadingOneCoin } = useQuery(GET_ONE_COIN, {
+  const { data: oneCoin, loading: loadingOneCoin } = useQuery<OneCoin, CoinId>(GET_ONE_COIN, {
     variables: {
       coin: coinId,
     },
@@ -42,25 +64,26 @@ export default function CoinInfo() {
 
   useEffect(() => {
     if (!loadingOneCoin) {
-      setCoinInfo((prevValue: object[]) => [...prevValue, oneCoin.getCoinByName]);
+      setCoinInfo((prevValue: object[]) => [...prevValue, oneCoin!.getCoinByName]);
     }
   }, [oneCoin]);
 
-  // fetch choosen coin history using Apolo + GraphQl from localhost:4000 ////////////////////////////////
-  const [coinPriceInterval, setCoinPriceInterval] = useState<[]>([]);
-  const { data: coinHistoryPrice, loading: loadingCoinHistory } = useQuery(GET_COIN_HISTORY, {
-    variables: {
-      coin: coinId,
+  const [coinPriceInterval, setCoinPriceInterval] = useState<CoinHistoryData[]>([]);
+  const { data: coinHistoryPrice, loading: loadingCoinHistory } = useQuery<CoinHistoryPrice>(
+    GET_COIN_HISTORY,
+    {
+      variables: {
+        coin: coinId,
+      },
     },
-  });
+  );
 
   useEffect(() => {
     if (!loadingCoinHistory) {
-      setCoinPriceInterval(coinHistoryPrice.getCoinHistory);
+      setCoinPriceInterval(coinHistoryPrice!.getCoinHistory);
     }
   }, [coinHistoryPrice]);
 
-  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   useEffect(() => {
@@ -68,11 +91,6 @@ export default function CoinInfo() {
       dispatch(getCurrentPrice(totalPorfolioPrice(data?.getAllCoins, items)));
     }
   }, [data?.getAllCoins, items]);
-
-  // useEffect(() => {
-  //   dispatch(fetchCurrentCoinInfo(coinId));
-  //   dispatch(fetchPriceInterval(coinId));
-  // }, []);
 
   return (
     <div>
@@ -94,6 +112,11 @@ export default function CoinInfo() {
                 <AddButton rank={el.rank} name={el.name} price={+el.priceUsd} text={'+'} />
               </div>
             </div>
+
+            <LineChart
+              coinPriceInterval={coinPriceInterval}
+              loadingCoinHistory={loadingCoinHistory}
+            />
             <PriceChart
               name={el.name}
               coinPriceInterval={coinPriceInterval}

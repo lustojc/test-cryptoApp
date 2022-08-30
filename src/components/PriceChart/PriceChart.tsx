@@ -9,12 +9,13 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { CoinHistoryData } from '../../pages/CoinInfo';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export interface chartProps {
   name: string;
-  coinPriceInterval: [];
+  coinPriceInterval: CoinHistoryData[];
   borderColor: string;
   backgroundColor: string;
   responsive: boolean;

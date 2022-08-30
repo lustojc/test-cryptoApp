@@ -16,6 +16,10 @@ interface popularCoins {
   id: string;
 }
 
+export interface queryPopularCoins {
+  getAllCoins: [popularCoins];
+}
+
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
@@ -27,10 +31,7 @@ export default function Header() {
   );
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
-  // fetch coins using Apolo + GraphQl from localhost:4000
-  const { data } = useQuery(GET_ALL_COINS);
-
-  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
+  const { data } = useQuery<queryPopularCoins>(GET_ALL_COINS);
 
   const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 

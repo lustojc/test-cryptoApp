@@ -16,7 +16,7 @@ import { formatPrices, formatLowPrice } from '../../libs/helpers/formatPrices';
 import { GET_ALL_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
 
-interface Coin {
+export interface Coin {
   id: number;
   rank: string;
   name: string;
@@ -28,23 +28,24 @@ interface Coin {
   changePercent24Hr: string;
 }
 
+export interface QueryData {
+  getAllCoins: [Coin];
+}
+
 export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinsPerPage] = useState<number>(10);
 
-  // fetch coins using Apolo + GraphQl from localhost:4000
-  const [allCoins, setAllCoins] = useState<[]>([]);
-  const { data, loading } = useQuery(GET_ALL_COINS);
+  const [allCoins, setAllCoins] = useState<Coin[]>([]);
+  const { data, loading } = useQuery<QueryData>(GET_ALL_COINS);
 
   useEffect(() => {
     if (!loading) {
-      setAllCoins(data.getAllCoins);
+      setAllCoins(data!.getAllCoins);
     }
   }, [data]);
 
-  // fetch coins using Redux-thunk
   const dispatch = useAppDispatch();
-  // const allCoins = useAppSelector((state) => state.coinSlice.coins);
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
   useEffect(() => {
