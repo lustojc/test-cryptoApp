@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 import { item, removeItem } from '../../store/slices/portfolioSlice';
 
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
+import { DonutChart } from '../DonutChart/DonutChart';
 
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ const PortfolioItem = () => {
           </div>
         </div>
       ))}
+      <DonutChart data={userCoins} width={350} height={350} />
     </div>
   );
 };

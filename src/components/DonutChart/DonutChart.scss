@@ -1,0 +1,53 @@
+.graph-block {
+  display: flex;
+  align-items: center;
+
+  svg {
+    display: inline-block;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+  }
+
+  &__wrapper .slice {
+    transition-duration: 0.3s;
+    transition-property: filter, opacity;
+    filter: saturate(100%);
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  &__wrapper.hasHighlight .slice {
+    filter: saturate(50%);
+    opacity: 0.2;
+    &:hover {
+      filter: saturate(100%);
+      opacity: 1;
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    width: 140px;
+
+    &-rectangle {
+      width: 20px;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+    &-title {
+      padding-left: 10px;
+    }
+  }
+}
