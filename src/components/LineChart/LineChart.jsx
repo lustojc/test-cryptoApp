@@ -12,8 +12,10 @@ function LineChart({ coinPriceInterval, loadingCoinHistory }) {
     let svg = d3
       .select(svgRef.current)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr(
+        'viewBox',
+        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`,
+      )
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -54,10 +56,9 @@ function LineChart({ coinPriceInterval, loadingCoinHistory }) {
       .attr('fill', 'none')
       .attr('stroke', 'steelblue')
       .attr('stroke-width', 1.5)
-      .attr('d', valueLine)
-      .text('test');
+      .attr('d', valueLine);
   };
-  console.log(loadingCoinHistory);
+
   useEffect(() => {
     if (!loadingCoinHistory) {
       createGraph();

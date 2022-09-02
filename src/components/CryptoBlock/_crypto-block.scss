@@ -18,34 +18,34 @@
     font-weight: 700;
     font-size: 20px;
 
-    @media (max-width: 1180px) {
-      li:nth-child(4) {
+    @media (max-width: $breakpoint-desktop-large) {
+      &-title:nth-child(4) {
         display: none;
       }
-      li:nth-child(5) {
+      &-title:nth-child(5) {
         display: none;
       }
       grid-template-columns: repeat(7, 1fr);
     }
 
-    @media (max-width: 1010px) {
-      li:nth-child(6) {
+    @media (max-width: $breakpoint-desktop-medium) {
+      &-title:nth-child(6) {
         display: none;
       }
-      li:nth-child(7) {
+      &-title:nth-child(7) {
         display: none;
       }
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (max-width: 755px) {
-      li:nth-child(8) {
+    @media (max-width: $breakpoint-tablet-large) {
+      &-title:nth-child(8) {
         display: none;
       }
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (max-width: 510px) {
-      li:nth-child(3) {
+    @media (max-width: $breakpoint-phone) {
+      &-title:nth-child(3) {
         display: none;
       }
       grid-template-columns: repeat(2);
@@ -65,29 +65,29 @@
       transition: all linear 0.5s;
     }
 
-    @media (max-width: 1180px) {
-      li:nth-child(4) {
+    @media (max-width: $breakpoint-desktop-large) {
+      .list:nth-child(4) {
         display: none;
       }
-      li:nth-child(5) {
+      .list:nth-child(5) {
         display: none;
       }
       grid-template-columns: repeat(6, 1fr);
     }
 
-    @media (max-width: 1010px) {
-      li:nth-child(6) {
+    @media (max-width: $breakpoint-desktop-medium) {
+      .list:nth-child(6) {
         display: none;
       }
-      li:nth-child(7) {
+      .list:nth-child(7) {
         display: none;
       }
       grid-template-columns: repeat(4, 1fr);
       grid-column-gap: 110px;
     }
 
-    @media (max-width: 755px) {
-      li:nth-child(8) {
+    @media (max-width: $breakpoint-tablet-large) {
+      .list:nth-child(8) {
         display: none;
       }
       grid-template-columns: repeat(3, 1fr);
@@ -95,8 +95,8 @@
       grid-column-gap: 50px;
     }
 
-    @media (max-width: 510px) {
-      li:nth-child(3) {
+    @media (max-width: $breakpoint-phone) {
+      .list:nth-child(3) {
         display: none;
       }
       grid-template-columns: repeat(2);
@@ -112,13 +112,14 @@
     border: 0px;
     margin-left: 20px;
 
-    @media (max-width: 800px) {
+    @media (max-width: $breakpoint-tablet) {
       width: 20px;
       height: 20px;
+      padding: 0 !important;
     }
   }
 
-  @media (max-width: 755px) {
+  @media (max-width: $breakpoint-tablet-large) {
     margin: 0 50px;
   }
 }

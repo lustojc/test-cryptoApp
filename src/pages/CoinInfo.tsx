@@ -30,7 +30,7 @@ interface coinInfo {
 }
 
 interface OneCoin {
-  getCoinByName: [coinInfo];
+  getCoinByName: coinInfo;
 }
 
 interface CoinId {
@@ -55,7 +55,7 @@ export default function CoinInfo() {
 
   const { data } = useQuery<QueryData>(GET_ALL_COINS);
 
-  const [coinInfo, setCoinInfo] = useState<object[]>([]);
+  const [coinInfo, setCoinInfo] = useState<coinInfo[]>([]);
   const { data: oneCoin, loading: loadingOneCoin } = useQuery<OneCoin, CoinId>(GET_ONE_COIN, {
     variables: {
       coin: coinId,
@@ -64,11 +64,10 @@ export default function CoinInfo() {
 
   useEffect(() => {
     if (!loadingOneCoin) {
-      setCoinInfo((prevValue: object[]) => [...prevValue, oneCoin!.getCoinByName]);
+      setCoinInfo([oneCoin!.getCoinByName]);
     }
   }, [oneCoin]);
 
-  const [coinPriceInterval, setCoinPriceInterval] = useState<CoinHistoryData[]>([]);
   const { data: coinHistoryPrice, loading: loadingCoinHistory } = useQuery<CoinHistoryPrice>(
     GET_COIN_HISTORY,
     {
@@ -77,12 +76,6 @@ export default function CoinInfo() {
       },
     },
   );
-
-  useEffect(() => {
-    if (!loadingCoinHistory) {
-      setCoinPriceInterval(coinHistoryPrice!.getCoinHistory);
-    }
-  }, [coinHistoryPrice]);
 
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
@@ -95,7 +88,7 @@ export default function CoinInfo() {
   return (
     <div>
       <div>
-        {coinInfo.map((el: any) => (
+        {coinInfo.map((el: coinInfo) => (
           <>
             <div className="info-block">
               <div key={el.rank}>
@@ -114,12 +107,12 @@ export default function CoinInfo() {
             </div>
 
             <LineChart
-              coinPriceInterval={coinPriceInterval}
+              coinPriceInterval={coinHistoryPrice!?.getCoinHistory}
               loadingCoinHistory={loadingCoinHistory}
             />
             <PriceChart
               name={el.name}
-              coinPriceInterval={coinPriceInterval}
+              coinPriceInterval={coinHistoryPrice!?.getCoinHistory}
               borderColor={'rgb(255, 99, 132)'}
               backgroundColor={'rgba(255, 99, 132, 0.5)'}
               responsive={true}

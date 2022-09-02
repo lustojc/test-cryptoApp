@@ -86,13 +86,14 @@ export default function Header() {
             <div data-cy="header-price" className="header-portfolio__price">
               {currentPrice} USD{' '}
             </div>
-            <div style={priceDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
+            <div className={`${priceDiff >= 0 ? 'positive-value' : 'negative-value'}`}>
               {priceDiff > 0 ? '+' : ''}
               {priceDiff} $
             </div>
             <div
-              className="header-portfolio__diffPercents"
-              style={+percentDiff >= 0 ? { color: 'green' } : { color: 'red' }}>
+              className={`header-portfolio__diffPercents ${
+                +percentDiff >= 0 ? 'positive-value' : 'negative-value'
+              }`}>
               ({percentDiff})%
             </div>
           </div>

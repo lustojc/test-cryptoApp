@@ -77,7 +77,7 @@ export const DonutChart = ({ width, height, data }) => {
   return (
     <>
       <div className="graph-block">
-        <svg width={width} height={height}>
+        <svg className="graph-block__svg" width={width} height={height}>
           <g className="graph-block__shape" transform={`translate(${width / 2}, ${height / 2})`}>
             {shapes}
           </g>

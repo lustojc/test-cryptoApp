@@ -11,7 +11,7 @@ export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
 
   let coinsArr = [];
   for (let i = 0; i < itemIds.length; i++) {
-    const a = allCoins.find((obj) => +obj.rank === +itemIds[i]);
+    const a = allCoins?.find((obj) => +obj.rank === +itemIds[i]);
     let item = {};
     let count = [];
     for (let j = 0; j < items.length; j++) {

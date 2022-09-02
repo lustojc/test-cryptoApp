@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
 
-  svg {
+  &__svg {
     display: inline-block;
   }
 
@@ -49,5 +49,9 @@
     &-title {
       padding-left: 10px;
     }
+  }
+
+  @media (max-width: $breakpoint-tablet-small) {
+    display: block;
   }
 }

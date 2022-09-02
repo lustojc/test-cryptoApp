@@ -22,10 +22,10 @@ const PortfolioItem = () => {
   return (
     <div data-cy="portfolio" className="portfolio-wrapper">
       <div className="portfolio-settings">
-        <div>Rank</div>
-        <div>Name</div>
-        <div>Total $</div>
-        <div>Amount</div>
+        <div className="portfolio-settings__title">Rank</div>
+        <div className="portfolio-settings__title">Name</div>
+        <div className="portfolio-settings__title">Total $</div>
+        <div className="portfolio-settings__title">Amount</div>
       </div>
       {userCoins.map((coin: item) => (
         <div key={coin.id} data-cy="portfolio-item" className="portfolio-block">

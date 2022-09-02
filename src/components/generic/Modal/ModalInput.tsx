@@ -52,6 +52,7 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
             <div className="modal-block__content-items">
               <div className="modal-block__content-items__container">
                 <input
+                  className="modal-block__content-items__input"
                   style={{ borderColor: errorColor }}
                   type="text"
                   maxLength={8}
@@ -59,7 +60,10 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                   onChange={(e) => getInputValue(e.target.value)}
                   data-cy="input"
                 />
-                <button data-cy="addCoinsBtn" onClick={() => onClickAdd(inputValue)}>
+                <button
+                  data-cy="addCoinsBtn"
+                  className="modal-block__content-items__button"
+                  onClick={() => onClickAdd(inputValue)}>
                   Add
                 </button>
               </div>
