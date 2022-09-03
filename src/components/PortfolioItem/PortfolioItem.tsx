@@ -18,7 +18,6 @@ const PortfolioItem = () => {
       dispatch(removeItem(item));
     }
   };
-  console.log(userCoins);
 
   return (
     <div data-cy="portfolio" className="portfolio-wrapper">
