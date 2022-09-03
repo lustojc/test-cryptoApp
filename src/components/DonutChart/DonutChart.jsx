@@ -67,7 +67,7 @@ export const DonutChart = ({ width, height, data }) => {
         className="graph-block__container slice">
         <div className="graph-block__content" key={i}>
           <div className="graph-block__content-rectangle" style={{ background: colors(i) }} />
-          <div className="graph-block__content-title">{el.data.title}</div>
+          <div className="graph-block__content-title">{el.data.name}</div>
         </div>
         <div>{formattedValue()}%</div>
       </div>

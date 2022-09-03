@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
+
 import { useAppDispatch } from '../../../libs/hooks/hooks';
+
 import { addItems } from '../../../store/slices/portfolioSlice';
+
 import InputForm from '../Modal/ModalInput';
+
 import Button from './Button';
 
 interface buttonProps {
   rank: string;
   price: number;
   text: string;
+  id: string;
   name: string;
 }
 
-export default function AddButton({ rank, name, price, text }: buttonProps) {
+export default function AddButton({ rank, id, price, text, name }: buttonProps) {
   const [formActive, setFormActive] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -20,9 +25,10 @@ export default function AddButton({ rank, name, price, text }: buttonProps) {
     if (+value > 0) {
       const item = {
         id: rank,
-        title: name,
+        title: id,
         price: price,
         amount: value,
+        name: name,
       };
       dispatch(addItems(item));
       setFormActive(!formActive);

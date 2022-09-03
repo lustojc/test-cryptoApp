@@ -1,13 +1,11 @@
 interface props {
-  coinsPerPage: number;
-  totalCoins: number;
   paginate: (el: number) => void;
 }
 
-export default function Pagination({ coinsPerPage, totalCoins, paginate }: props) {
+export default function Pagination({ paginate }: props) {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalCoins / coinsPerPage); i++) {
+  for (let i = 1; i <= 10; i++) {
     pageNumbers.push(i);
   }
 

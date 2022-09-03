@@ -18,6 +18,7 @@ const PortfolioItem = () => {
       dispatch(removeItem(item));
     }
   };
+  console.log(userCoins);
 
   return (
     <div data-cy="portfolio" className="portfolio-wrapper">
@@ -30,7 +31,7 @@ const PortfolioItem = () => {
       {userCoins.map((coin: item) => (
         <div key={coin.id} data-cy="portfolio-item" className="portfolio-block">
           <div className="portfolio-block__rank">{coin.id}.</div>
-          <div className="portfolio-block__title">{coin.title}</div>
+          <div className="portfolio-block__title">{coin.name}</div>
           <div className="portfolio-block__price">
             {formatLowPrice((coin.price * coin.count).toString())}$
           </div>

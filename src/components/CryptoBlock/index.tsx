@@ -1,12 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
-
-import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
-
-import { getCurrentPrice } from '../../store/slices/portfolioSlice';
-import { totalPorfolioPrice } from '../../libs/helpers/calcCurrentPrice';
 
 import Pagination from '../Pagination';
 import AddButton from '../generic/Button/AddButton';
@@ -15,40 +10,21 @@ import { formatPrices, formatLowPrice } from '../../libs/helpers/formatPrices';
 
 import { GET_ALL_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
-
-export interface Coin {
-  id: number;
-  rank: string;
-  name: string;
-  priceUsd: string;
-  vwap24Hr: string;
-  marketCapUsd: string;
-  volumeUsd24Hr: string;
-  supply: string;
-  changePercent24Hr: string;
-}
-
-export interface QueryData {
-  getAllCoins: [Coin];
-}
+import { QueryData, Coin, CoinLimit } from './types';
 
 export default function CryptoBlock() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [coinsPerPage] = useState<number>(10);
 
-  const { data: allCoins, loading } = useQuery<QueryData>(GET_ALL_COINS);
-
-  const dispatch = useAppDispatch();
-  const items = useAppSelector((state) => state.portfolioSlice.items);
-
-  useEffect(() => {
-    dispatch(getCurrentPrice(totalPorfolioPrice(allCoins!?.getAllCoins, items)));
-  }, [allCoins, items]);
-
   const lastCoinIndex = currentPage * coinsPerPage;
   const firstCoinIndex = lastCoinIndex - coinsPerPage;
 
-  const currentCoins = allCoins!?.getAllCoins.slice(firstCoinIndex, lastCoinIndex);
+  const { data: allCoins, loading } = useQuery<QueryData, CoinLimit>(GET_ALL_COINS, {
+    variables: {
+      limit: coinsPerPage,
+      offset: firstCoinIndex,
+    },
+  });
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -74,7 +50,7 @@ export default function CryptoBlock() {
           </ul>
         </div>
         <div>
-          {currentCoins!?.map((coin: Coin) => (
+          {allCoins?.getAllCoins.map((coin: Coin) => (
             <div key={coin.rank} className="crypto-block">
               <div>
                 <Link to={'/coin/' + coin.id} state={{ coinId: coin.id }}>
@@ -102,17 +78,19 @@ export default function CryptoBlock() {
                 </Link>
               </div>
               <div>
-                <AddButton rank={coin.rank} name={coin.name} price={+coin.priceUsd} text={'+'} />
+                <AddButton
+                  rank={coin.rank}
+                  name={coin.name}
+                  id={coin.id}
+                  price={+coin.priceUsd}
+                  text={'+'}
+                />
               </div>
             </div>
           ))}
         </div>
       </div>
-      <Pagination
-        coinsPerPage={coinsPerPage}
-        totalCoins={allCoins!?.getAllCoins.length}
-        paginate={paginate}
-      />
+      <Pagination paginate={paginate} />
     </>
   );
 }

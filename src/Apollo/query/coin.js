@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_ALL_COINS = gql`
-  query {
-    getAllCoins {
+  query getAllCoins($limit: Int, $offset: Int) {
+    getAllCoins(limit: $limit, offset: $offset) {
       id
       rank
       name
@@ -24,6 +24,25 @@ export const GET_ONE_COIN = gql`
       rank
       name
       priceUsd
+      id
+    }
+  }
+`;
+
+export const GET_CURRENT_COINS = gql`
+  query getCurrentPortfolioCoins($coins: String) {
+    getCurrentPortfolioCoins(coins: $coins) {
+      id
+      rank
+      name
+      symbol
+      supply
+      maxSupply
+      marketCapUsd
+      volumeUsd24Hr
+      priceUsd
+      changePercent24Hr
+      vwap24Hr
     }
   }
 `;

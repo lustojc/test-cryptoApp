@@ -8,6 +8,7 @@ export type item = {
   title: string;
   price: number;
   count: number;
+  name: string;
 };
 
 export interface items {

@@ -8,8 +8,10 @@ const app = express();
 app.use(cors());
 
 const root = {
-  getAllCoins: async () => {
-    const { data } = await axios.get(`https://api.coincap.io/v2/assets`);
+  getAllCoins: async ({ limit, offset }) => {
+    const { data } = await axios.get(
+      `https://api.coincap.io/v2/assets?limit=${limit}&offset=${offset}`,
+    );
     return data.data;
   },
   getCoinByName: async ({ coin }) => {
@@ -20,6 +22,10 @@ const root = {
     const { data } = await axios.get(
       `https://api.coincap.io/v2/assets/${coin}/history?interval=m30`,
     );
+    return data.data;
+  },
+  getCurrentPortfolioCoins: async ({ coins }) => {
+    const { data } = await axios.get(`https://api.coincap.io/v2/assets/?ids=${coins}`);
     return data.data;
   },
 };

@@ -2,23 +2,17 @@ import { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { GET_ALL_COINS } from '../../Apollo/query/coin';
+import { GET_ALL_COINS, GET_CURRENT_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
 
-import { useAppSelector } from '../../libs/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
 
 import { Modal } from '../generic/Modal/Modal';
+import { totalPorfolioPrice } from '../../libs/helpers/calcCurrentPrice';
+import { getCurrentPrice } from '../../store/slices/portfolioSlice';
 
-interface popularCoins {
-  priceUsd: string;
-  name: string;
-  id: string;
-}
-
-export interface queryPopularCoins {
-  getAllCoins: [popularCoins];
-}
+import { QueryPopularCoins, PopularCoins, QueryPortfolioCoins } from './types';
 
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -31,7 +25,24 @@ export default function Header() {
   );
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
-  const { data } = useQuery<queryPopularCoins>(GET_ALL_COINS);
+  const { data } = useQuery<QueryPopularCoins>(GET_ALL_COINS, {
+    variables: {
+      limit: 3,
+      offset: 0,
+    },
+  });
+
+  const { data: currentCoins } = useQuery<QueryPortfolioCoins>(GET_CURRENT_COINS, {
+    variables: {
+      coins: items.map((el) => el.title).join(','),
+    },
+  });
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentPrice(totalPorfolioPrice(currentCoins!?.getCurrentPortfolioCoins, items)));
+  }, [currentCoins!?.getCurrentPortfolioCoins, items]);
 
   const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 
@@ -69,7 +80,7 @@ export default function Header() {
             <h1 className="header__title">Cryptocurrency App</h1>
           </Link>
           <div className="header-popular">
-            {data?.getAllCoins.slice(0, 3).map((el: popularCoins) => (
+            {data?.getAllCoins.slice(0, 3).map((el: PopularCoins) => (
               <div className="header-popular__coin" key={el.id}>
                 {el.name}: {formatLowPrice(el.priceUsd)}$
               </div>

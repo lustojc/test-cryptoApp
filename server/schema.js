@@ -23,7 +23,8 @@ const schema = buildSchema(`
     }
 
     type Query {
-        getAllCoins: [Coin]
+        getAllCoins(limit: Int, offset: Int): [Coin]
+        getCurrentPortfolioCoins(coins: String): [Coin]
         getCoinByName(coin: String): Coin
         getCoinHistory(coin: String): [CoinHistory]
     }

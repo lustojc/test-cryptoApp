@@ -9,7 +9,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { CoinHistoryData } from '../../pages/CoinInfo';
+
+import { CoinHistoryData } from '../../pages/types';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 

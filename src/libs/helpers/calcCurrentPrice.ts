@@ -4,6 +4,7 @@ interface allCoins {
   rank: string;
   priceUsd: string;
   name: string;
+  id: string;
 }
 
 export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
@@ -21,14 +22,16 @@ export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
     if (a?.name != undefined) {
       item = {
         id: +a.rank,
-        title: a.name,
+        title: a.id,
         count: +count[i],
         price: +a.priceUsd,
+        name: a.name,
       };
     } else {
       return coinsArr;
     }
     coinsArr.push(item);
   }
+
   return coinsArr;
 };
