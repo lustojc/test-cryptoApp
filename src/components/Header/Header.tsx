@@ -42,7 +42,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getCurrentPrice(totalPorfolioPrice(currentCoins!?.getCurrentPortfolioCoins, items)));
-  }, [currentCoins!?.getCurrentPortfolioCoins]);
+  }, [currentCoins!?.getCurrentPortfolioCoins, items]);
 
   const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 
