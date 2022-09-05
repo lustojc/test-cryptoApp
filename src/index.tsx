@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://apollo-crypto-server.herokuapp.com/graphQl',
   cache: new InMemoryCache(),
 });
 
