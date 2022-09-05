@@ -8,18 +8,18 @@ interface allCoins {
 }
 
 export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
-  const itemIds: number[] = items.map((el) => el.id);
+  const itemIds: string[] = items.map((el) => el.name);
 
   let coinsArr = [];
   for (let i = 0; i < itemIds.length; i++) {
-    const a = allCoins?.find((obj) => +obj.rank === +itemIds[i]);
+    const a = allCoins?.find((obj) => obj.name === itemIds[i]);
     let item = {};
     let count = [];
     for (let j = 0; j < items.length; j++) {
       const element = items[j];
       count.push(element.count);
     }
-    if (a?.name != undefined) {
+    if (a) {
       item = {
         id: +a.rank,
         title: a.id,
@@ -32,6 +32,5 @@ export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
     }
     coinsArr.push(item);
   }
-
   return coinsArr;
 };

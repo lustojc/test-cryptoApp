@@ -42,7 +42,7 @@ export default function Header() {
 
   useEffect(() => {
     dispatch(getCurrentPrice(totalPorfolioPrice(currentCoins!?.getCurrentPortfolioCoins, items)));
-  }, [currentCoins!?.getCurrentPortfolioCoins, items]);
+  }, [currentCoins!?.getCurrentPortfolioCoins]);
 
   const priceDiff = parseFloat((+currentPrice - +price).toFixed(2));
 
@@ -93,21 +93,23 @@ export default function Header() {
           data-cy="header-portfolio"
           onClick={() => setModalActive(true)}>
           <div className="header-portfolio__title">My Portfolio</div>
-          <div className="header-portfolio__info">
-            <div data-cy="header-price" className="header-portfolio__price">
-              {currentPrice} USD{' '}
+          {currentCoins?.getCurrentPortfolioCoins && (
+            <div className="header-portfolio__info">
+              <div data-cy="header-price" className="header-portfolio__price">
+                {currentPrice} USD{' '}
+              </div>
+              <div className={`${priceDiff >= 0 ? 'positive-value' : 'negative-value'}`}>
+                {priceDiff > 0 ? '+' : ''}
+                {priceDiff} $
+              </div>
+              <div
+                className={`header-portfolio__diffPercents ${
+                  +percentDiff >= 0 ? 'positive-value' : 'negative-value'
+                }`}>
+                ({percentDiff})%
+              </div>
             </div>
-            <div className={`${priceDiff >= 0 ? 'positive-value' : 'negative-value'}`}>
-              {priceDiff > 0 ? '+' : ''}
-              {priceDiff} $
-            </div>
-            <div
-              className={`header-portfolio__diffPercents ${
-                +percentDiff >= 0 ? 'positive-value' : 'negative-value'
-              }`}>
-              ({percentDiff})%
-            </div>
-          </div>
+          )}
         </div>
         {modalActive && <Modal setModalActive={setModalActive} />}
       </div>
