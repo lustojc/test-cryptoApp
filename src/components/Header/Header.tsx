@@ -32,9 +32,12 @@ export default function Header() {
     },
   });
 
+  const searchQuery = items.map((el) => el.title).join(',');
+
   const { data: currentCoins } = useQuery<QueryPortfolioCoins>(GET_CURRENT_COINS, {
+    skip: searchQuery === '',
     variables: {
-      coins: items.map((el) => el.title).join(','),
+      coins: searchQuery,
     },
   });
 
@@ -93,23 +96,21 @@ export default function Header() {
           data-cy="header-portfolio"
           onClick={() => setModalActive(true)}>
           <div className="header-portfolio__title">My Portfolio</div>
-          {currentCoins?.getCurrentPortfolioCoins && (
-            <div className="header-portfolio__info">
-              <div data-cy="header-price" className="header-portfolio__price">
-                {currentPrice} USD{' '}
-              </div>
-              <div className={`${priceDiff >= 0 ? 'positive-value' : 'negative-value'}`}>
-                {priceDiff > 0 ? '+' : ''}
-                {priceDiff} $
-              </div>
-              <div
-                className={`header-portfolio__diffPercents ${
-                  +percentDiff >= 0 ? 'positive-value' : 'negative-value'
-                }`}>
-                ({percentDiff})%
-              </div>
+          <div className="header-portfolio__info">
+            <div data-cy="header-price" className="header-portfolio__price">
+              {currentPrice} USD{' '}
             </div>
-          )}
+            <div className={`${priceDiff >= 0 ? 'positive-value' : 'negative-value'}`}>
+              {priceDiff > 0 ? '+' : ''}
+              {priceDiff} $
+            </div>
+            <div
+              className={`header-portfolio__diffPercents ${
+                +percentDiff >= 0 ? 'positive-value' : 'negative-value'
+              }`}>
+              ({percentDiff})%
+            </div>
+          </div>
         </div>
         {modalActive && <Modal setModalActive={setModalActive} />}
       </div>
