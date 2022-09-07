@@ -1,8 +1,9 @@
 interface props {
   paginate: (el: number) => void;
+  currentPage: number;
 }
 
-export default function Pagination({ paginate }: props) {
+export default function Pagination({ paginate, currentPage }: props) {
   const pageNumbers = [];
 
   for (let i = 1; i <= 10; i++) {
@@ -14,7 +15,12 @@ export default function Pagination({ paginate }: props) {
       <ul className="pagination-block__content">
         {pageNumbers.map((el: number) => (
           <li className="pagination-block__content-item" key={el}>
-            <a className="pagination-block__content-link" onClick={() => paginate(el)}>
+            <a
+              href="#"
+              className={`pagination-block__content-link ${
+                currentPage === el && 'active-pagination'
+              }`}
+              onClick={() => paginate(el)}>
               {el}
             </a>
           </li>

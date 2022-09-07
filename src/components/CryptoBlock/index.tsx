@@ -90,7 +90,7 @@ export default function CryptoBlock() {
           ))}
         </div>
       </div>
-      <Pagination paginate={paginate} />
+      <Pagination paginate={paginate} currentPage={currentPage} />
     </>
   );
 }

@@ -91,7 +91,8 @@ export default function Header() {
           </div>
         </div>
 
-        <div
+        <a
+          href="#"
           className="header-portfolio"
           data-cy="header-portfolio"
           onClick={() => setModalActive(true)}>
@@ -111,7 +112,7 @@ export default function Header() {
               ({percentDiff})%
             </div>
           </div>
-        </div>
+        </a>
         {modalActive && <Modal setModalActive={setModalActive} />}
       </div>
     </div>
