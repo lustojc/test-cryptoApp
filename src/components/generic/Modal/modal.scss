@@ -116,6 +116,7 @@
         background-color: gray;
         color: white;
         cursor: pointer;
+        border: none;
 
         @media (max-width: $breakpoint-phone-large) {
           width: 50px;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import Message from '../Message/Message';
 
 interface InputFormProps {
@@ -18,6 +19,11 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
     } else if (value === '') {
       setInputValue(value);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent<EventTarget>): void => {
+    e.preventDefault();
+    onClickAdd(inputValue);
   };
 
   useEffect(() => {
@@ -51,21 +57,23 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
             </button>
             <div className="modal-block__content-items">
               <div className="modal-block__content-items__container">
-                <input
-                  className="modal-block__content-items__input"
-                  style={{ borderColor: errorColor }}
-                  type="text"
-                  maxLength={8}
-                  value={inputValue}
-                  onChange={(e) => getInputValue(e.target.value)}
-                  data-cy="input"
-                />
-                <button
-                  data-cy="addCoinsBtn"
-                  className="modal-block__content-items__button"
-                  onClick={() => onClickAdd(inputValue)}>
-                  Add
-                </button>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <input
+                    className="modal-block__content-items__input"
+                    style={{ borderColor: errorColor }}
+                    type="text"
+                    maxLength={8}
+                    value={inputValue}
+                    onChange={(e) => getInputValue(e.target.value)}
+                    data-cy="input"
+                  />
+                  <button
+                    data-cy="addCoinsBtn"
+                    className="modal-block__content-items__button"
+                    type="submit">
+                    Add
+                  </button>
+                </form>
               </div>
               {errorMessage && <Message color={errorColor} message={errorMessage} fontSize={14} />}
             </div>
