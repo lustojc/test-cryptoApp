@@ -1,23 +1,13 @@
 interface props {
   color: string;
   message: string;
-  fontSize: number;
-  backgroundColor?: string;
+  fontSize?: string;
   fontStyle?: 'italic' | 'bold' | 'normal' | 'oblique';
 }
 
-export default function Message({ color, message, fontSize, backgroundColor, fontStyle }: props) {
-  const style = {
-    color,
-    fontSize: fontSize,
-    display: 'inline',
-    padding: '10px',
-    backgroundColor,
-    fontStyle,
-  };
-
+export default function Message({ color, message }: props) {
   return (
-    <div data-cy="errorMessage" style={style}>
+    <div data-cy="errorMessage" className={`message message-color__${color}`}>
       {message}
     </div>
   );

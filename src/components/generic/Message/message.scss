@@ -1,0 +1,20 @@
+.message {
+  &-fontSize {
+    &__normal {
+      font-size: 14;
+    }
+  }
+
+  &-color {
+    &__black {
+      color: black;
+    }
+    &__red {
+      color: red;
+    }
+
+    &__green {
+      color: green;
+    }
+  }
+}

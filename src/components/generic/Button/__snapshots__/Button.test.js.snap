@@ -2,8 +2,7 @@
 
 exports[`test button component render button 1`] = `
 <button
-  class="crypto-block__btn"
-  style="background-color: black; padding: 0.5rem 1rem; color: green;"
+  class="button button-backgroundColor__olive button-size__md button-color__white button-borderRadius__undefined "
 >
   Add
 </button>

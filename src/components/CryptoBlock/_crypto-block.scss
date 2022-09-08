@@ -106,10 +106,6 @@
   }
 
   &__btn {
-    background-color: rgb(128, 130, 8);
-    color: aliceblue;
-    cursor: pointer;
-    border: 0px;
     margin-left: 20px;
 
     @media (max-width: $breakpoint-tablet) {

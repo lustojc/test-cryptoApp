@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../libs/hooks/hooks';
 
 import { addItems } from '../../../store/slices/portfolioSlice';
 
-import InputForm from '../Modal/ModalInput';
+import InputForm from '../../Modal/ModalInput';
 
 import Button from './Button';
 
@@ -39,10 +39,10 @@ export default function AddButton({ rank, id, price, text, name }: buttonProps) 
 
   useEffect(() => {
     if (formActive) {
-      document.body.style.overflowY = 'hidden';
+      document.body.classList.add('overflow-hidden');
     }
     return () => {
-      document.body.style.overflowY = 'auto';
+      document.body.classList.remove('overflow-hidden');
     };
   }, [formActive]);
 
@@ -63,8 +63,8 @@ export default function AddButton({ rank, id, price, text, name }: buttonProps) 
   return (
     <div>
       <Button
-        text={'+'}
-        backgroundColor={'rgb(128, 130, 8)'}
+        text={text}
+        backgroundColor={'olive'}
         color={'white'}
         size={'md'}
         onClickBtn={onClickBtn}

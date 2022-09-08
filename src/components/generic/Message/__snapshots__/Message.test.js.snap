@@ -2,8 +2,8 @@
 
 exports[`test message component render message 1`] = `
 <div
+  class="message message-color__green"
   data-cy="errorMessage"
-  style="display: inline; padding: 10px; background-color: red;"
 >
   Correct value
 </div>

@@ -3,7 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 import { item, removeItem } from '../../store/slices/portfolioSlice';
 
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
+
 import { DonutChart } from '../DonutChart/DonutChart';
+
+import Button from '../generic/Button/Button';
 
 const PortfolioItem = () => {
   const dispatch = useAppDispatch();
@@ -37,11 +40,16 @@ const PortfolioItem = () => {
           <div data-cy="portfolio-item-count" className="portfolio-block__count">
             {formatLowPrice(coin.count?.toString())}
           </div>
-          <div
-            data-cy="portfolio-deleteBtn"
-            onClick={() => onClickRemove(coin.id, coin.price, coin.count)}
-            className="portfolio-block__deleteBtn">
-            X
+          <div className="portfolio-block__deleteBtn">
+            <Button
+              backgroundColor={'darkGrey'}
+              borderRadius={'rounded'}
+              color={'white'}
+              size={'md'}
+              dataAtt="portfolio-deleteBtn"
+              onClickBtn={() => onClickRemove(coin.id, coin.price, coin.count)}
+              text="X"
+            />
           </div>
         </div>
       ))}

@@ -5,11 +5,11 @@ import Message from './Message';
 
 describe('test message component', () => {
   it('render message', () => {
-    render(<Message message="Correct value" backgroundColor="red" />);
+    render(<Message message="Correct value" color="green" />);
 
     const messageElement = screen.getByText(/correct value/i);
     expect(messageElement).toBeInTheDocument();
-    expect(messageElement).toHaveStyle({ backgroundColor: 'red' });
+    expect(messageElement).toHaveClass('message-color__green');
     expect(messageElement).toMatchSnapshot();
   });
 });

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import Button from '../generic/Button/Button';
 
-import Message from '../Message/Message';
+import Message from '../generic/Message/Message';
 
 interface InputFormProps {
   onClickAdd: (value: string) => void;
@@ -49,17 +50,22 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                 How many coins do you want to add to your portfolio?
               </h5>
             </div>
-            <button
-              className="modal-block__content-closeBtn"
-              data-cy="closeBtn"
-              onClick={() => setFormActive(false)}>
-              X
-            </button>
+            <div className="modal-block__content-closeBtn">
+              <Button
+                dataAtt="closeBtn"
+                onClickBtn={() => setFormActive(false)}
+                text={'X'}
+                backgroundColor={'white'}
+                color={'black'}
+                size={'md'}
+                borderRadius={'rounded'}
+              />
+            </div>
             <div className="modal-block__content-items">
               <div className="modal-block__content-items__container">
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <form className="modal-block__content-form" onSubmit={(e) => handleSubmit(e)}>
                   <input
-                    className="modal-block__content-items__input"
+                    className={`modal-block__content-items__input`}
                     style={{ borderColor: errorColor }}
                     type="text"
                     maxLength={8}
@@ -67,15 +73,20 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
                     onChange={(e) => getInputValue(e.target.value)}
                     data-cy="input"
                   />
-                  <button
-                    data-cy="addCoinsBtn"
-                    className="modal-block__content-items__button"
-                    type="submit">
-                    Add
-                  </button>
+                  <div className="modal-block__content-items__button">
+                    <Button
+                      dataAtt="addCoinsBtn"
+                      type="submit"
+                      text="Add"
+                      backgroundColor="darkGrey"
+                      color="white"
+                      size="lg"
+                      borderRadius="rounded"
+                    />
+                  </div>
                 </form>
               </div>
-              {errorMessage && <Message color={errorColor} message={errorMessage} fontSize={14} />}
+              {errorMessage && <Message color={errorColor} message={errorMessage} />}
             </div>
           </div>
         </div>

@@ -23,6 +23,10 @@
     border: 2px solid grey;
     overflow-y: scroll;
 
+    &-form {
+      display: flex;
+    }
+
     @media (max-width: $breakpoint-desktop) {
       width: 900px;
       height: 60vh;
@@ -61,18 +65,18 @@
         font-weight: 500;
         font-size: 36px;
         text-align: center;
+
+        @media (max-width: $breakpoint-desktop) {
+          font-size: 24px;
+        }
+
+        @media (max-width: $breakpoint-tablet-small) {
+          font-size: 18px;
+        }
       }
     }
 
     &-closeBtn {
-      cursor: pointer;
-      font-weight: 500;
-      padding: 4px 8px;
-      border-radius: 8px;
-      border: none;
-      font-size: 18px;
-      color: #2c3e50;
-      background: white;
       box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
       position: absolute;
       right: 0;
@@ -109,14 +113,9 @@
       }
 
       &__button {
-        border-radius: 10px;
         margin-left: 20px;
         width: 70px;
         height: 50px;
-        background-color: gray;
-        color: white;
-        cursor: pointer;
-        border: none;
 
         @media (max-width: $breakpoint-phone-large) {
           width: 50px;

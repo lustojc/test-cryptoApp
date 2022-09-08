@@ -77,7 +77,7 @@ export default function CryptoBlock() {
                   </ul>
                 </Link>
               </div>
-              <div>
+              <div className="crypto-block__btn">
                 <AddButton
                   rank={coin.rank}
                   name={coin.name}

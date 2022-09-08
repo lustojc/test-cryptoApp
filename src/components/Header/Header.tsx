@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
 
-import { Modal } from '../generic/Modal/Modal';
+import { Modal } from '../Modal/Modal';
 import { totalPorfolioPrice } from '../../libs/helpers/calcCurrentPrice';
 import { getCurrentPrice } from '../../store/slices/portfolioSlice';
 
@@ -58,10 +58,10 @@ export default function Header() {
 
   useEffect(() => {
     if (modalActive) {
-      document.body.style.overflowY = 'hidden';
+      document.body.classList.add('overflow-hidden');
     }
     return () => {
-      document.body.style.overflowY = 'auto';
+      document.body.classList.remove('overflow-hidden');
     };
   }, [modalActive]);
 
@@ -90,9 +90,7 @@ export default function Header() {
             ))}
           </div>
         </div>
-
         <a
-          href="#"
           className="header-portfolio"
           data-cy="header-portfolio"
           onClick={() => setModalActive(true)}>

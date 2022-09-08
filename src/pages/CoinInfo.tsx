@@ -7,9 +7,9 @@ import { useQuery } from '@apollo/client';
 
 import AddButton from '../components/generic/Button/AddButton';
 import PriceChart from '../components/PriceChart/PriceChart';
+import LineChart from '../components/LineChart/LineChart';
 
 import { formatLowPrice } from '../libs/helpers/formatPrices';
-import LineChart from '../components/LineChart/LineChart';
 
 import { LocationState, OneCoin, CoinId, CoinHistoryPrice, Info } from './types';
 
@@ -56,7 +56,7 @@ export default function CoinInfo() {
                   </li>
                 </ul>
               </div>
-              <div>
+              <div className="info-block__btn">
                 <AddButton
                   rank={el.rank}
                   name={el.name}
