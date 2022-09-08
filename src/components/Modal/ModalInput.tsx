@@ -65,8 +65,7 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
               <div className="modal-block__content-items__container">
                 <form className="modal-block__content-form" onSubmit={(e) => handleSubmit(e)}>
                   <input
-                    className={`modal-block__content-items__input`}
-                    style={{ borderColor: errorColor }}
+                    className="modal-block__content-items__input"
                     type="text"
                     maxLength={8}
                     value={inputValue}
