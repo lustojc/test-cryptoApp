@@ -7,30 +7,19 @@ interface allCoins {
   id: string;
 }
 
-export const totalPorfolioPrice = (allCoins: allCoins[], items: item[]) => {
-  const itemIds: string[] = items.map((el) => el.name);
-
-  let coinsArr = [];
-  for (let i = 0; i < itemIds.length; i++) {
-    const a = allCoins?.find((obj) => obj.name === itemIds[i]);
-    let item = {};
-    let count = [];
-    for (let j = 0; j < items.length; j++) {
-      const element = items[j];
-      count.push(element.count);
+export const totalPorfolioPrice = (allCoins: allCoins[] = [], items: item[]) => {
+  const coinsArr = [];
+  for (let i = 0; i < items.length; i++) {
+    const currentObj = allCoins?.find((obj) => obj.name === items[i].name);
+    if (currentObj) {
+      coinsArr.push({
+        id: +currentObj.rank,
+        title: currentObj.id,
+        name: currentObj.name,
+        count: items[i].count,
+        price: +currentObj.priceUsd,
+      });
     }
-    if (a) {
-      item = {
-        id: +a.rank,
-        title: a.id,
-        count: +count[i],
-        price: +a.priceUsd,
-        name: a.name,
-      };
-    } else {
-      return coinsArr;
-    }
-    coinsArr.push(item);
   }
   return coinsArr;
 };
