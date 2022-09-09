@@ -1,11 +1,11 @@
-export interface PopularCoins {
+export interface TopCoins {
   priceUsd: string;
   name: string;
   id: string;
 }
 
 export interface QueryPopularCoins {
-  getAllCoins: [PopularCoins];
+  getAllCoins: [TopCoins];
 }
 
 export interface PortfolioCoins {

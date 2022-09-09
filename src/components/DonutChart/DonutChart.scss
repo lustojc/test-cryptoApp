@@ -11,22 +11,24 @@
     flex-direction: column;
     flex-wrap: wrap;
     max-height: 300px;
-  }
 
-  &__wrapper .slice {
-    transition-duration: 0.3s;
-    transition-property: filter, opacity;
-    filter: saturate(100%);
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  &__wrapper.hasHighlight .slice {
-    filter: saturate(50%);
-    opacity: 0.2;
-    &:hover {
+    .slice {
+      transition-duration: 0.3s;
+      transition-property: filter, opacity;
       filter: saturate(100%);
       opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  &__wrapper.hasHighlight {
+    .slice {
+      filter: saturate(50%);
+      opacity: 0.2;
+      &:hover {
+        filter: saturate(100%);
+        opacity: 1;
+      }
     }
   }
 
