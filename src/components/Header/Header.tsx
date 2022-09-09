@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { Link } from 'react-router-dom';
+
+import { useScrollBlock } from '../../libs/hooks/useScrollBlock';
 
 import { GET_ALL_COINS, GET_CURRENT_COINS } from '../../Apollo/query/coin';
 import { useQuery } from '@apollo/client';
@@ -16,6 +18,7 @@ import { QueryPopularCoins, PopularCoins, QueryPortfolioCoins } from './types';
 
 export default function Header() {
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [blockScroll, allowScroll] = useScrollBlock();
 
   const price = useAppSelector((state) =>
     formatLowPrice(state.portfolioSlice.totalPrice.toString()),
@@ -56,12 +59,14 @@ export default function Header() {
     localStorage.setItem('portfolio', json);
   }, [items]);
 
+  const bodyRef = useRef(null);
+
   useEffect(() => {
     if (modalActive) {
-      document.body.classList.add('overflow-hidden');
+      blockScroll()
     }
     return () => {
-      document.body.classList.remove('overflow-hidden');
+      allowScroll()
     };
   }, [modalActive]);
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch } from '../../../libs/hooks/hooks';
+import { useScrollBlock } from '../../../libs/hooks/useScrollBlock';
 
 import { addItems } from '../../../store/slices/portfolioSlice';
 
@@ -18,6 +19,7 @@ interface buttonProps {
 
 export default function AddButton({ rank, id, price, text, name }: buttonProps) {
   const [formActive, setFormActive] = useState<boolean>(false);
+  const [blockScroll, allowScroll] = useScrollBlock();
 
   const dispatch = useAppDispatch();
 
@@ -39,10 +41,10 @@ export default function AddButton({ rank, id, price, text, name }: buttonProps) 
 
   useEffect(() => {
     if (formActive) {
-      document.body.classList.add('overflow-hidden');
+      blockScroll();
     }
     return () => {
-      document.body.classList.remove('overflow-hidden');
+      allowScroll();
     };
   }, [formActive]);
 
