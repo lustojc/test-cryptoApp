@@ -6,15 +6,13 @@ import PopularCoins from '../PopularCoins/PopularCoins';
 export default function Header() {
   return (
     <div className="header">
-      <div className="header-container">
-        <div>
-          <Link to="/">
-            <h1 className="header__title">Cryptocurrency App</h1>
-          </Link>
-          <PopularCoins />
-        </div>
-        <Portfolio />
+      <div>
+        <Link to="/">
+          <h1 className="header__title">Cryptocurrency App</h1>
+        </Link>
+        <PopularCoins />
       </div>
+      <Portfolio />
     </div>
   );
 }

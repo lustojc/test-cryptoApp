@@ -32,3 +32,9 @@ body {
 .overflow-hidden {
   overflow-y: hidden;
 }
+
+.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  margin-right: 17px;
+}

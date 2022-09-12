@@ -6,9 +6,9 @@ import { GET_CURRENT_COINS } from '../../Apollo/query/coin';
 import { totalPorfolioPrice } from '../../libs/helpers/calcCurrentPrice';
 import { formatLowPrice } from '../../libs/helpers/formatPrices';
 import { useAppDispatch, useAppSelector } from '../../libs/hooks/hooks';
-import { useScrollBlock } from '../../libs/hooks/useScrollBlock';
 
 import { getCurrentPrice } from '../../store/slices/portfolioSlice';
+import { openModal } from '../../store/slices/modalSlice';
 
 import { QueryPortfolioCoins } from '../Header/types';
 
@@ -16,7 +16,6 @@ import { Modal } from '../Modal/Modal';
 
 export default function Portfolio() {
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [blockScroll, allowScroll] = useScrollBlock();
 
   const items = useAppSelector((state) => state.portfolioSlice.items);
 
@@ -54,10 +53,10 @@ export default function Portfolio() {
 
   useEffect(() => {
     if (modalActive) {
-      blockScroll();
+      dispatch(openModal(true));
     }
     return () => {
-      allowScroll();
+      dispatch(openModal(false));
     };
   }, [modalActive]);
 

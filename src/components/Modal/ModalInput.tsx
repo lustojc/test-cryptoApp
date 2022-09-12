@@ -45,11 +45,9 @@ export default function InputForm({ onClickAdd, setFormActive }: InputFormProps)
       <div className="modal-block" data-cy="modal-block" onClick={() => setFormActive(false)}>
         <div className="modal-block__wrapper" onClick={(e) => e.stopPropagation()}>
           <div className="modal-block__content">
-            <div className="modal-block__content-title">
-              <h5 className="modal-block__content-title__main">
-                How many coins do you want to add to your portfolio?
-              </h5>
-            </div>
+            <h5 className="modal-block__content-title">
+              How many coins do you want to add to your portfolio?
+            </h5>
             <div className="modal-block__content-closeBtn">
               <Button
                 dataAtt="closeBtn"

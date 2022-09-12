@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch } from '../../../libs/hooks/hooks';
-import { useScrollBlock } from '../../../libs/hooks/useScrollBlock';
 
+import { openModal } from '../../../store/slices/modalSlice';
 import { addItems } from '../../../store/slices/portfolioSlice';
 
 import InputForm from '../../Modal/ModalInput';
@@ -19,7 +19,6 @@ interface buttonProps {
 
 export default function AddButton({ rank, id, price, text, name }: buttonProps) {
   const [formActive, setFormActive] = useState<boolean>(false);
-  const [blockScroll, allowScroll] = useScrollBlock();
 
   const dispatch = useAppDispatch();
 
@@ -41,10 +40,10 @@ export default function AddButton({ rank, id, price, text, name }: buttonProps) 
 
   useEffect(() => {
     if (formActive) {
-      blockScroll();
+      dispatch(openModal(true));
     }
     return () => {
-      allowScroll();
+      dispatch(openModal(false));
     };
   }, [formActive]);
 

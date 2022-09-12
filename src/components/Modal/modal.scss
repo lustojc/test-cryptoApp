@@ -4,7 +4,7 @@
   left: 0;
   background: #252424cc;
   width: 100vw;
-  height: 200vh;
+  height: 100%;
 
   &__wrapper {
     position: fixed;
@@ -58,21 +58,18 @@
       overflow: hidden;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
+      margin: 0;
+      padding: 10px;
+      font-weight: 500;
+      font-size: 36px;
+      text-align: center;
 
-      &__main {
-        margin: 0;
-        padding: 10px;
-        font-weight: 500;
-        font-size: 36px;
-        text-align: center;
+      @media (max-width: $breakpoint-desktop) {
+        font-size: 24px;
+      }
 
-        @media (max-width: $breakpoint-desktop) {
-          font-size: 24px;
-        }
-
-        @media (max-width: $breakpoint-tablet-small) {
-          font-size: 18px;
-        }
+      @media (max-width: $breakpoint-tablet-small) {
+        font-size: 18px;
       }
     }
 

@@ -2,9 +2,23 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
   margin: 0 40px 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+  }
 
   &-portfolio {
     cursor: pointer;
+
+    @media (max-width: $breakpoint-tablet) {
+      margin-top: 20px;
+      &__title {
+        margin: 6px 90px;
+      }
+    }
 
     &__info {
       display: flex;
@@ -24,23 +38,6 @@
     &__coin {
       margin-right: 20px;
       color: green;
-    }
-  }
-
-  &-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @media (max-width: $breakpoint-tablet) {
-      flex-direction: column;
-
-      .header-portfolio {
-        margin-top: 20px;
-        &__title {
-          margin: 6px 90px;
-        }
-      }
     }
   }
 
